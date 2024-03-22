@@ -1,0 +1,19 @@
+tuple_angka = (1, 2, 3, 4, 5)
+tuple_buah = ("Apel", "Jeruk", "Pisang")
+tuple_campuran = (1, "dua", 3.0, True)
+
+print(tuple_angka)
+print(tuple_buah)
+print(tuple_campuran)
+
+print(type(tuple_angka))
+print(type(tuple_buah))
+print(type(tuple_campuran))
+
+# output >>>
+# (1, 2, 3, 4, 5)
+# ('Apel', 'Jeruk', 'Pisang')
+# (1, 'dua', 3.0, True)
+# <class 'tuple'>
+# <class 'tuple'>
+# <class 'tuple'>
