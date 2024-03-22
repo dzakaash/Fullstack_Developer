@@ -393,13 +393,13 @@ def update_todo(id):
     todo = Todo.query.filter_by(public_id=id).first_or_404()
     # Memperbarui data tugas
     todo.name=data.get('name', todo.name)
-    if 'is completed' in data:
-        todo.is_completed=data['is completed']
+    if 'completed' in data:
+        todo.completed=data['completed']
     db.session.commit()
     # Memberikan respons dengan data tugas yang diperbarui
     return {
         'id': todo.public_id, 'name': todo.name, 
-        'is completed': todo.is_completed,
+        'completed': todo.completed,
         'owner': {
             'name': todo.owner.name, 'email': todo.owner.email,
             'is admin': todo.owner.is_admin 
