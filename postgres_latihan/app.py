@@ -385,21 +385,21 @@ def create_todo():
 def update_todo(id):
     data = request.get_json()
     # Memeriksa apakah data nama atau status completed diberikan
-    if not 'name_todo' in data or not 'completed' in data:
+    if not 'name' in data or not 'completed' in data:
         return {
             'error': 'Bad Request',
             'message': 'Name or completed fields need to be present'
         }, 400
     todo = Todo.query.filter_by(public_id=id).first_or_404()
     # Memperbarui data tugas
-    todo.name_todo=data.get('name_todo', todo.name_todo)
-    if 'completed' in data:
-        todo.completed=data['completed']
+    todo.name=data.get('name', todo.name)
+    if 'is completed' in data:
+        todo.is_completed=data['is completed']
     db.session.commit()
     # Memberikan respons dengan data tugas yang diperbarui
     return {
-        'id': todo.public_id, 'name_todo': todo.name_todo, 
-        'completed': todo.completed,
+        'id': todo.public_id, 'name': todo.name, 
+        'is completed': todo.is_completed,
         'owner': {
             'name': todo.owner.name, 'email': todo.owner.email,
             'is admin': todo.owner.is_admin 
