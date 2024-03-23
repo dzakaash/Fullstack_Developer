@@ -20,14 +20,19 @@ app.config['SECRET_KEY']='secret'
 # app.config['SQLALCHEMY_DATABASE_URI'] diatur untuk menentukan URI (Uniform Resource Identifier) database yang akan digunakan oleh SQLAlchemy. Dalam kasus ini, itu diatur ke sqlite:///app.db, yang berarti menggunakan SQLite sebagai database dengan file bernama app.db di direktori aplikasi.
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:12345678@localhost/postgres'
 
+
 # Inisialisasi objek SQLAlchemy untuk berinteraksi dengan database
 # db = SQLAlchemy(app) digunakan untuk membuat instance SQLAlchemy yang terhubung ke aplikasi Flask yang dibuat sebelumnya (app). SQLAlchemy adalah toolkit Python yang sangat kuat untuk bekerja dengan database relasional. Dengan menggunakan SQLAlchemy, kita dapat dengan mudah berinteraksi dengan database dalam aplikasi Flask.
 # Secara teknis, ketika kita menggunakan SQLAlchemy dengan aplikasi Flask, SQLAlchemy akan menggunakan objek Flask app untuk mengakses konfigurasi database yang telah diatur, seperti URI database. Ini memungkinkan SQLAlchemy untuk berinteraksi dengan database yang sudah diatur dalam aplikasi Flask dengan mudah dan tanpa harus menuliskan konfigurasi ulang.
-db = SQLAlchemy(app)
+db = SQLAlchemy(app) # app, model_class=Base
+
+# initialize the app with the extension
+db.init_app(app)
 
 # migrate = Migrate(app, db)
 
 # Pembuatan model User menggunakan SQLAlchemy
+# db.Model: Ini adalah kelas dasar dari SQLAlchemy yang digunakan untuk mendefinisikan model atau entitas dalam database. Kelas ini digunakan sebagai superclass untuk mendefinisikan tabel-tabel dalam database.
 class User(db.Model):
     # Digunakan db.Column untuk membuat kolom.
     id = db.Column(db.Integer, primary_key=True, index=True)
@@ -38,7 +43,15 @@ class User(db.Model):
     # is_admin bidang/kolom, yang akan kita gunakan untuk otorisasi.
     is_admin = db.Column(db.Boolean, default=False)
     # Relasi antara User dan Todo
+    # db.relationship: Ini adalah sebuah fungsi yang digunakan untuk mendefinisikan relasi antara dua tabel dalam database. 
     # todosfield, yang kami gunakan untuk menghubungkan ke model tugas, sesuai dengan namanya (hubungan). Bagian ini mengambil tiga nilai: Yang pertama mirip dengan yang lain, tergantung pada jenis bidangnya. Yang kedua adalah backref, yang merupakan bidang (variabel) yang kita gunakan untuk mereferensikan model pengguna dalam model tugas. Dan argumen terakhir adalah lazy, yaitu bagaimana data dimuat.
+    # backref='owner': Argumen ini menunjukkan bahwa relasi ini memiliki sebuah atribut tambahan di tabel Todo yang mengacu kembali ke objek User. Dengan kata lain, setiap objek Todo akan memiliki atribut owner yang akan mengacu pada objek User yang terkait.
+    # lazy='dynamic': Argumen ini mengatur perilaku lazy loading untuk relasi. Lazy loading adalah teknik di mana data tidak dimuat dari database kecuali jika diperlukan. Nilai 'dynamic' menunjukkan bahwa kueri akan menghasilkan objek yang dapat dipetakan secara langsung, yang memungkinkan Anda untuk menambahkan kriteria tambahan ke kueri tersebut sebelum melakukan eksekusi.
+    # Jenis-jenis lain dari argumen lazy dalam SQLAlchemy adalah:
+    # 'select': Ini adalah nilai default. Data terkait dimuat menggunakan kueri terpisah saat diperlukan.
+    # 'joined': Data terkait dimuat menggunakan join SQL.
+    # 'subquery': Data terkait dimuat menggunakan subkueri terpisah.
+    # 'dynamic': Seperti yang dijelaskan sebelumnya, data terkait dimuat sebagai query yang dapat dipetakan secara dinamis.
     todos=db.relationship('Todo', backref='owner', lazy='dynamic')
 
     # Representasi objek User
@@ -61,7 +74,7 @@ class Todo(db.Model):
     def __repr__(self):
         return f'Todo: <{self.name}>'
    
-# matikan jika pakai flask migrate 
+# Setelah semua model dan tabel ditentukan, panggil untuk membuat skema tabel dalam database. matikan jika pakai flask migrate 
 with app.app_context():
     db.create_all()
 """
