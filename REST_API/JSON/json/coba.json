@@ -1,0 +1,24 @@
+[
+    {
+        "nama" : "Dzaka Ali",
+        "umur" : 25,
+        "no" : "08577326955",
+        "pekerjaan" : "Fullstack Developer",
+        "hobby" : ["nonton", "baca"],
+        "pebimbing" : {
+            "Pebimbing 1" : "Mas Teddy",
+            "Pebimbing 2" : "Mas Hanif"
+        }
+    },
+    {
+        "nama" : "Saiful Husna",
+        "umur" : 25,
+        "no" : "08577326955",
+        "pekerjaan" : "Fullstack Developer",
+        "hobby" : ["nonton", "baca"],
+        "pebimbing" : {
+            "Pebimbing 1" : "Mas Teddy",
+            "Pebimbing 2" : "Mas Hanif"
+        }
+    }
+]

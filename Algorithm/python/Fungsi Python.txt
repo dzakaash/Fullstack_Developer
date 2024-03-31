@@ -1,0 +1,529 @@
+Fungsi Python
+
+INTEGER
+
+- abs(): Mengembalikan nilai absolut, manual
+if num < 0:
+    nilai_absolut = -num
+else:
+    nilai_absolut = num
+
+- round(): Membulatkan nilai ke bilangan bulat terdekat, manual
+hasil = int(num * (10 ** <digit_desimal>) + 0.5) / (10 ** <digit_desimal>)
+
+- max() dan min(): Mengembalikan nilai maksimum atau minimum dari sejumlah nilai, manual
+max = arr[0]
+for num in arr:
+    if arr > max: 
+        max = num
+
+- sum(): Menghitung jumlah semua elemen dalam suatu iterable (seperti list atau tuple), manual
+total = 0
+for num in arr:
+    total += num
+
+
+COMPREHENSION
+
+- fiter : Rumus Ekspresi untuk Memfilter List berdasarkan Kondisi Tertentu
+hasil_filter = [<elemen> for <num> in <list> if <kondisi>]
+
+- list comprehension : membuat loop dan membangun list dalam satu baris kode.
+hasil_comprehension = [<ekspresi> for <num> in <list>]
+
+- in line : membuat fungsi if else dalam satu baris
+hasil = <opsi 1> if <kondisi> else <opsi 2>
+
+- multiple assignment :  menukar nilai antar variabel atau menginisialisasi beberapa variabel dalam satu baris.
+a, b = b, a
+
+- lambda : untuk mendefinisikan fungsi tanpa harus menulisnya menggunakan pernyataan def secara terpisah.
+lambda argumen: ekspresi
+co : 
+kuadrat = lambda x: x ** 2
+print(kuadrat(5))  # Output: 25
+
+- map() : untuk menerapkan suatu fungsi ke setiap elemen dalam sebuah iterable (seperti list, tuple, atau set) dan mengembalikan iterator yang berisi hasil dari pemanggilan fungsi tersebut untuk setiap elemen.
+map(fungsi, iterable)
+co :
+list_awal = [1, 2, 3, 4, 5]
+list_hasil = map(kuadrat, list_awal)
+print(list(list_hasil))  # Output: [1, 4, 9, 16, 25]
+
+- filter() : untuk menyaring elemen-elemen dari sebuah iterable berdasarkan suatu kondisi yang ditentukan, dan mengembalikan iterator yang berisi elemen-elemen yang memenuhi kondisi tersebut.
+filter(kondisi, iterable)
+co :
+list_awal = [-1, 2, -3, 4, -5]
+list_hasil = filter(lambda x: x > 0, list_awal)
+print(list(list_hasil))  # Output: [2, 4]
+
+- Generator : sebuah fungsi khusus dalam Python yang menghasilkan serangkaian nilai secara bertahap menggunakan pernyataan yield secara iteratif.
+co :
+def generate_numbers(n):
+    for i in range(n):
+        yield i
+gen = generate_numbers(5)
+for num in gen:
+    print(num) # 5 4 3 2 1
+
+- Decorator : untuk mengubah atau memodifikasi fungsi atau metode yang ada secara dinamis. 
+co :
+def my_decorator(func):
+    def wrapper():
+        print("Sebelum pemanggilan fungsi")
+        func()
+        print("Setelah pemanggilan fungsi")
+    return wrapper
+@my_decorator #akan mengisi func()
+def say_hello():
+    print("Hello, World!")
+say_hello()
+# Sebelum pemanggilan fungsi
+# Hello, World!
+# Setelah pemanggilan fungsi
+
+- Rekursif : konsep dalam pemrograman di mana sebuah fungsi memanggil dirinya sendiri secara berulang dalam rangkaian operasi.
+co :
+def faktorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * faktorial(n - 1)
+print(faktorial(5))  # Output: 120
+
+
+RUMUS
+
+- divmod(): Mengembalikan pasangan (divmod) hasil bagi dan sisa bagi dari dua angka. manual
+hasil_bagi = num // pembagi
+sisa_bagi = num % pembagi 
+
+- pow(,): Menghitung pangkat dari suatu angka. manual
+hasil_pangkat = basis ** pangkat
+
+- count(): Menghitung jumlah kemunculn elemen dalam suatu iterable (seperti list atau tuple), manual
+count = 0
+for num in arr:
+    total += 1
+
+- list unik : Rumus Ekspresi untuk Mencari Nilai Unik dalam List
+nilai_unik = list(set(list))
+
+- logaritma
+import math
+nilai_log = math.log(10)
+
+- faktorial
+import math
+nilai_faktorial = math.factorial(5)
+
+- Deret Aritmatika
+jumlah_deret_aritmatika = (n / 2) * (2 * a + (n - 1) * d)
+
+- Deret Geometri
+jumlah_deret_geometri = a * ((1 - r**n) / (1 - r))
+
+- Eksponensial
+eksponensial = math.exp(x)
+
+- Permutasi dan Kombinasi
+from math import factorial
+permutasi = factorial(n) / factorial(n - r)
+kombinasi = factorial(n) / (factorial(r) * factorial(n - r))
+
+- Median
+median = sorted(list)[len(list) // 2] if len(list) % 2 != 0 else (sorted(list)[len(list) // 2 - 1] + sorted(list)[len(list) // 2]) / 2
+
+- Modulus
+hasil_modulus = angka1 % angka2
+
+- Standar Deviasi
+import statistics
+standar_deviasi = statistics.stdev(data)
+
+
+LIST
+
+- len(): Mengembalikan panjang (jumlah elemen) dari suatu list. manual
+len = 0
+for elemen in arr:
+    len += 1
+
+- append(): Menambahkan elemen ke akhir list. manual
+
+- extend(): Menambahkan elemen-elemen dari suatu iterable (seperti list) ke akhir list.
+arr1 = [1, 2, 3]
+arr2 = [4, 5, 6]
+arr1.extend(arr2)
+
+- insert(): Menyisipkan elemen pada indeks tertentu.
+my_list = [1, 2, 3, 5]
+my_list.insert(3, 4)
+print(my_list)  # Output: [1, 2, 3, 4, 5]
+manual,
+list_angka = [1, 2, 3]
+indeks_tujuan = 1
+nilai_tambahan = 4
+bagian_awal = list_angka[:indeks_tujuan]
+bagian_akhir = list_angka[indeks_tujuan:]
+list_angka_manual = bagian_awal + [nilai_tambahan] + bagian_akhir
+
+- remove(): Menghapus elemen tertentu dari list.
+my_list = [1, 2, 3, 4, 5]
+my_list.remove(3)
+print(my_list)  # Output: [1, 2, 4, 5]
+manual,
+list_angka = [1, 2, 3, 2, 4]
+nilai_hapus = 2
+indeks_hapus = None
+for i in range(len(list_angka)):
+    if list_angka[i] == nilai_hapus:
+        indeks_hapus = i
+        break
+if indeks_hapus is not None:
+    list_angka_manual = list_angka[:indeks_hapus] + list_angka[indeks_hapus + 1:]
+else:
+    list_angka_manual = list_angka[:]
+
+- pop(): Menghapus dan mengembalikan elemen pada indeks tertentu atau indeks terakhir jika tidak diindikasikan.
+my_list = [1, 2, 3, 4, 5]
+elemen_terhapus = my_list.pop(2)
+print(my_list)         # Output: [1, 2, 4, 5]
+print(elemen_terhapus)  # Output: 3
+manual,
+list_angka = [1, 2, 3, 4]
+indeks_pop = 2
+elemen_di_pop_manual = list_angka[indeks_pop]
+list_angka_manual = list_angka[:indeks_pop] + list_angka[indeks_pop + 1:]
+
+- index(): Mengembalikan indeks dari elemen pertama dengan nilai tertentu.
+my_list = [10, 20, 30, 20, 40]
+indeks = my_list.index(20)
+print(indeks)  # Output: 1
+manual,
+list_angka = [1, 2, 3, 4] 
+elemen_dicari = 3
+indeks_tiga_manual = None
+for i in range(len(list_angka)):
+    if list_angka[i] == elemen_dicari:
+        indeks_tiga_manual = i
+        break
+if indeks_tiga_manual is not None: # Langkah 4: Tampilkan hasil
+    print(f"Indeks dari elemen {elemen_dicari} manual: {indeks_tiga_manual}")
+else:
+    print(f"Elemen {elemen_dicari} tidak ditemukan dalam list.")
+
+- count(): Menghitung berapa kali suatu nilai muncul dalam list.
+my_list = [1, 2, 3, 2, 4, 2, 5]
+jumlah_dua = my_list.count(2)
+print(jumlah_dua)  # Output: 3
+manual,
+list_angka = [1, 2, 3, 2, 4, 2] 
+elemen_diitung = 2
+jumlah_dua_manual = 0 
+for elemen in list_angka:
+    if elemen == elemen_diitung:
+        jumlah_dua_manual += 1
+
+- sort(): Mengurutkan elemen dalam list.
+my_list = [4, 2, 1, 3]
+my_list.sort()
+print(my_list)  # Output: [1, 2, 3, 4]
+manual,
+list_angka = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+n = len(list_angka)
+for i in range(n):
+    for j in range(0, n-i-1):
+        if list_angka[j] > list_angka[j+1]:
+            # Tukar elemen jika tidak terurut
+            list_angka[j], list_angka[j+1] = list_angka[j+1], list_angka[j]
+
+- reverse(): Membalik urutan elemen dalam list.
+my_list = [1, 2, 3, 4]
+my_list.reverse()
+print(my_list)  # Output: [4, 3, 2, 1]
+manual,
+list_angka = [1, 2, 3, 4, 5]
+list_angka_manual = list_angka[::-1]
+
+
+STRING
+- upper() dan lower(): Mengubah string menjadi huruf kapital atau huruf kecil.
+kalimat = "Belajar Python"
+kapital = kalimat.upper()
+kecil = kalimat.lower()
+print(kapital)  # Output: "BELAJAR PYTHON"
+print(kecil)    # Output: "belajar python"
+manual,
+teks = "contoh string"
+teks_kapital = ""
+for karakter in teks:
+    if 'a' <= karakter <= 'z': 
+        teks_kapital += chr(ord(karakter) - ord('a') + ord('A')) #ord() untuk dapatkan nilai unicode, chr() untuk dapatkan karakter dari unicode
+    else:
+        teks_kapital += karakter # Jika bukan huruf kecil, tambahkan karakter aslinya ke string hasil
+print(teks_kapital)  # Output: "CONTOH STRING"
+
+- capitalize() dan title(): Mengubah huruf pertama setiap kata menjadi huruf kapital.
+kalimat = "belajar bahasa python"
+kapital_pertama = kalimat.capitalize()
+kapital_setiap_kata = kalimat.title()
+print(kapital_pertama)       # Output: "Belajar bahasa python"
+print(kapital_setiap_kata)   # Output: "Belajar Bahasa Python"
+manual kapital,
+kalimat = "contoh kalimat"
+kalimat_terkapital = ""
+huruf_pertama = True
+for karakter in kalimat:
+    if huruf_pertama:
+        kalimat_terkapital += karakter.upper()
+        huruf_pertama = False
+    else:
+        kalimat_terkapital += karakter
+        if karakter == ' ':
+            huruf_pertama = True
+manual title,
+kalimat = "contoh kalimat"
+kalimat_berjudul = ""
+for indeks in range(len(kalimat)):
+    if indeks == 0 or kalimat[indeks - 1] == ' ':
+        kalimat_berjudul += kalimat[indeks].upper()
+    else:
+        kalimat_berjudul += kalimat[indeks]
+print(kalimat_berjudul)  # Output: "Contoh Kalimat"
+print(kalimat_terkapital)  # Output: "Contoh kalimat"
+
+- split(): Membagi string menjadi list berdasarkan pemisah tertentu.
+kalimat = "Hari ini cuaca bagus"
+kata_kalimat = kalimat.split()
+print(kata_kalimat)  # Output: ['Hari', 'ini', 'cuaca', 'bagus']
+manual,
+kalimat = "Ini adalah contoh kalimat" 
+potongan_kalimat = []
+potongan_saat_ini = ""
+for karakter in kalimat:
+    if karakter != ' ':
+        potongan_saat_ini += karakter
+    else:
+        potongan_kalimat.append(potongan_saat_ini)
+        potongan_saat_ini = ""
+potongan_kalimat.append(potongan_saat_ini)
+print(potongan_kalimat) # Output: ['Ini', 'adalah', 'contoh', 'kalimat']
+
+- join(): Menggabungkan elemen-elemen suatu iterable (seperti list) menjadi string.
+kata_list = ['Hari', 'ini', 'cuaca', 'bagus']
+kalimat_gabung = ' '.join(kata_list)
+print(kalimat_gabung)  # Output: "Hari ini cuaca bagus"
+# iterasi
+list_kata = ["Ini", "adalah", "contoh", "kalimat"] 
+kalimat_gabung = ""
+kata_pertama = True
+for kata in list_kata:
+    if not kata_pertama:
+        kalimat_gabung += " "
+    kalimat_gabung += kata
+    kata_pertama = False
+print(kalimat_gabung)
+
+- strip(), lstrip(), dan rstrip(): Menghapus spasi atau karakter tertentu dari awal (kiri), akhir (kanan), atau kedua sisi (kedua) string.
+teks = "   Contoh String   "
+tanpa_spasi = teks.strip()
+print(tanpa_spasi)  # Output: "Contoh String"
+manual,
+teks = "   Contoh String   "
+indeks_awal = 0
+indeks_akhir = len(teks) - 1
+while indeks_awal <= indeks_akhir and teks[indeks_awal].isspace():
+    indeks_awal += 1
+while indeks_akhir >= indeks_awal and teks[indeks_akhir].isspace():
+    indeks_akhir -= 1
+teks_strip = teks[indeks_awal:indeks_akhir+1]
+print(teks_strip) # Output: "Contoh String"
+
+- replace(): Menggantikan suatu substring dengan substring lain dalam string.
+kalimat = "Saya suka programming"
+kalimat_baru = kalimat.replace("suka", "gemar")
+print(kalimat_baru)  # Output: "Saya gemar programming"
+manual,
+teks = "Ini adalah contoh kalimat"
+teks_ganti = ""
+substring_ganti = "contoh"
+substring_pengganti = "sebuah"
+posisi = 0 
+while posisi < len(teks):
+    indeks = -1
+    for i in range(posisi, len(teks) - len(substring_ganti) + 1):
+        if teks[i:i+len(substring_ganti)] == substring_ganti:
+            indeks = i
+            break
+    if indeks == -1:
+        teks_ganti += teks[posisi:]
+        break
+    else:
+        teks_ganti += teks[posisi:indeks]
+        teks_ganti += substring_pengganti
+        posisi = indeks + len(substring_ganti)
+print(teks_ganti) # Output: "Ini adalah sebuah kalimat"
+
+- enumerate(): untuk mengembalikan indeks dan nilai dari suatu iterable, seperti list atau string, dalam bentuk tuple.
+list_angka = [10, 20, 30, 40]
+for indeks, nilai in enumerate(list_angka):
+    print(f"Indeks: {indeks}, Nilai: {nilai}")
+# Output:
+# Indeks: 0, Nilai: 10
+# Indeks: 1, Nilai: 20
+# Indeks: 2, Nilai: 30
+# Indeks: 3, Nilai: 40
+manual,
+list_angka = [10, 20, 30, 40]
+indeks = 0
+for nilai in list_angka:
+    print(f"Indeks: {indeks}, Nilai: {nilai}")
+    indeks += 1
+# Output:
+# Indeks: 0, Nilai: 10
+# Indeks: 1, Nilai: 20
+# Indeks: 2, Nilai: 30
+# Indeks: 3, Nilai: 40
+
+- isspace():  digunakan untuk memeriksa apakah semua karakter dalam suatu string adalah whitespace (spasi, tab, newline, dll.)
+# Kasus 1: Semua karakter adalah whitespace
+teks_1 = "    \t\n"
+if teks_1.isspace():
+    print("Semua karakter dalam teks_1 adalah whitespace.")
+else:
+    print("Tidak semua karakter dalam teks_1 adalah whitespace.")
+# Kasus 2: Terdapat karakter non-whitespace
+teks_2 = "  Ini adalah teks  "
+if teks_2.isspace():
+    print("Semua karakter dalam teks_2 adalah whitespace.")
+else:
+    print("Tidak semua karakter dalam teks_2 adalah whitespace.")
+
+- find():  digunakan untuk mencari indeks dari suatu substring dalam sebuah string. Fungsi ini mengembalikan indeks pertama dari kemunculan substring tersebut, atau -1 jika substring tidak ditemukan. 
+teks = "Ini adalah contoh kalimat"
+indeks = teks.find("contoh")
+print(f"Indeks pertama dari 'contoh' adalah: {indeks}") # Output: "Indeks pertama dari 'contoh' adalah: 11"
+manual,
+teks = "Ini adalah contoh kalimat"
+substring_cari = "contoh"
+indeks_pertama = -1
+posisi = 0
+while posisi <= len(teks) - len(substring_cari):
+    if teks[posisi:posisi+len(substring_cari)] == substring_cari:
+        indeks_pertama = posisi
+        break  # Hentikan iterasi jika substring ditemukan
+    posisi += 1
+
+SET
+- add(): Menambahkan elemen ke dalam set.
+my_set = {1, 2, 3}
+my_set.add(4)
+print(my_set)  # Output: {1, 2, 3, 4}
+
+- update(): Menambahkan elemen-elemen dari suatu iterable (seperti set atau list) ke dalam set.
+set_pertama = {1, 2, 3}
+set_kedua = {3, 4, 5}
+set_pertama.update(set_kedua)
+print(set_pertama)  # Output: {1, 2, 3, 4, 5}
+
+- remove() dan discard(): Menghapus elemen tertentu dari set. Perbedaannya, jika elemen tidak ada, remove() akan menghasilkan KeyError, sementara discard() tidak menghasilkan error.
+my_set = {1, 2, 3, 4, 5}
+my_set.remove(3)
+print(my_set)  # Output: {1, 2, 4, 5}
+
+- pop(): Menghapus dan mengembalikan elemen acak dari set.
+my_set = {1, 2, 3, 4, 5}
+elemen_terhapus = my_set.pop()
+print(my_set)         # Output: Set dengan satu elemen kurang dari sebelumnya
+print(elemen_terhapus)  # Output: Elemen yang terhapus
+
+- clear(): Menghapus semua elemen dari set, membuat set menjadi kosong.
+my_set = {1, 2, 3, 4, 5}
+my_set.clear()
+print(my_set)  # Output: set()
+
+- union() atau |: Menggabungkan dua set, menghasilkan set baru yang berisi semua elemen dari kedua set.
+set_a = {1, 2, 3}
+set_b = {3, 4, 5}
+set_gabungan = set_a.union(set_b)
+print(set_gabungan)  # Output: {1, 2, 3, 4, 5}
+
+- intersection() atau &: Menghasilkan set yang berisi elemen-elemen yang ada di kedua set.
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+set_irisan = set_a.intersection(set_b)
+print(set_irisan)  # Output: {3, 4}
+
+- difference() atau -: Menghasilkan set yang berisi elemen-elemen yang ada di set pertama tetapi tidak ada di set kedua.
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+set_selisih = set_a.difference(set_b)
+print(set_selisih)  # Output: {1, 2}
+
+- symmetric_difference() atau ^: Menghasilkan set yang berisi elemen-elemen yang hanya ada di salah satu dari kedua set.
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+set_dif_simetris = set_a.symmetric_difference(set_b)
+print(set_dif_simetris)  # Output: {1, 2, 5, 6}
+
+
+DICTIONARY
+- keys(): Mengembalikan daftar kunci-kunci dalam dictionary.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+daftar_kunci = my_dict.keys()
+print(daftar_kunci)  # Output: dict_keys(['a', 'b', 'c'])
+
+- values(): Mengembalikan daftar nilai-nilai dalam dictionary.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+daftar_nilai = my_dict.values()
+print(daftar_nilai)  # Output: dict_values([1, 2, 3])
+
+- items(): Mengembalikan daftar tupel pasangan kunci-nilai dalam dictionary.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+daftar_item = my_dict.items()
+print(daftar_item)  # Output: dict_items([('a', 1), ('b', 2), ('c', 3)])
+
+- get(): Mengembalikan nilai yang terkait dengan kunci tertentu. Jika kunci tidak ditemukan, dapat memberikan nilai default.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+nilai_a = my_dict.get('a')
+nilai_d = my_dict.get('d', 0)  # Default value 0 jika 'd' tidak ditemukan
+print(nilai_a)  # Output: 1
+print(nilai_d)  # Output: 0
+
+- pop(): Menghapus dan mengembalikan nilai yang terkait dengan kunci tertentu.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+nilai_b = my_dict.pop('b')
+print(my_dict)    # Output: {'a': 1, 'c': 3}
+print(nilai_b)    # Output: 2
+
+- popitem(): Menghapus dan mengembalikan pasangan kunci-nilai yang terakhir dimasukkan ke dalam dictionary.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+pasangan_terakhir = my_dict.popitem()
+print(my_dict)           # Output: {'a': 1, 'b': 2}
+print(pasangan_terakhir)  # Output: ('c', 3)
+
+- update(): Menggabungkan dictionary dengan dictionary lain atau dengan pasangan kunci-nilai baru.
+dict_a = {'a': 1, 'b': 2}
+dict_b = {'b': 3, 'c': 4}
+dict_a.update(dict_b)
+print(dict_a)  # Output: {'a': 1, 'b': 3, 'c': 4}
+
+- clear(): Menghapus semua pasangan kunci-nilai dari dictionary, membuat dictionary menjadi kosong.
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+my_dict.clear()
+print(my_dict)  # Output: {}
+
+
+BOOLEAN
+
+- all(): Mengembalikan True jika semua elemen dalam suatu iterable adalah True.
+list_boolean = [True, True, False, True]
+hasil_all = all(list_boolean)
+print(hasil_all)  # Output: False
+
+- any(): Mengembalikan True jika setidaknya satu elemen dalam suatu iterable adalah True.
+list_boolean = [False, False, True, False]
+hasil_any = any(list_boolean)
+print(hasil_any)  # Output: True
+

@@ -1,0 +1,21 @@
+Flask-Migrate
+- pip install Flask-Migrate : megninstall flask migrate
+- flask db init: menambahkan folder migrasi ke dalam aplikasi Flask
+- $env:FLASK_APP="<nama file>" untuk memindahkan environment, jika saat kita flask shell lokasi environment tidak di tempat kita melakukan poject
+- set FLASK_APP=<nama_aplikasi>.py : mengatur variabel FLASK_APP
+- flask db migrate -m "Initial migration.": membuat migrasi awal berdasarkan perubahan yang dilakukan pada model database. 
+- flask db upgrade: diterapkan setiap kali ada perubahan dalam model database.
+- flask db --help: untuk melihat semua perintah yang tersedia dalam Flask-Migrate.
+- flask db init --multidb: Opsi --multidb memungkinkan Flask-Migrate untuk melacak migrasi ke beberapa database yang terkait dengan aplikasi menggunakan fitur pengikatan Flask-SQLAlchemy.
+- flask db list-templates: menampilkan daftar templat repositori database yang tersedia untuk dipilih.
+- flask db revision: membuat skrip revisi kosong. Skrip ini perlu diedit secara manual dengan perubahan peningkatan dan penurunan versi. Pesan migrasi opsional dapat disertakan.
+- flask db migrate: setara dengan revision. mengisi skrip migrasi dengan perubahan yang terdeteksi secara otomatis. Namun, skrip yang dihasilkan harus ditinjau dan diedit karena tidak semua jenis perubahan dapat dideteksi secara otomatis.
+- flask db check: memeriksa apakah suatu perintah migrasi tidak akan menghasilkan perubahan apa pun. Jika perubahan tertunda terdeteksi, perintah akan mengeluarkan kode status bukan nol.
+- flask db edit <revision>: mengedit skrip revisi menggunakan editor yang ditetapkan dalam variabel lingkungan $EDITOR.
+- flask db upgrade dan flask db downgrade: meningkatkan atau menurunkan versi database sesuai dengan revisi tertentu. Jika tidak ada revisi yang disebutkan, maka perintah akan berasumsi dengan "head" atau -1.
+- flask db stamp: menyetel revisi dalam database ke revisi yang diberikan sebagai argumen tanpa melakukan migrasi apa pun.
+- flask db current: menampilkan revisi database saat ini.
+- flask db history: menampilkan daftar migrasi.
+- flask db show <revision>: menampilkan detail revisi yang dilambangkan dengan simbol yang diberikan.
+- flask db merge: menggabungkan dua revisi menjadi satu.
+- flask db heads dan flask db branches: menampilkan head atau titik cabang yang tersedia dalam direktori skrip revisi.

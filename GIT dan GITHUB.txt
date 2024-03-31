@@ -1,0 +1,62 @@
+GIT dan GITHUB
+
+3 area pada repo Git
+- Working tree, tempat menyimpan file
+- Staging area, tempat menyimpan perubahan (dengan git add)
+- History, menyimpan dari staging ke history dengan commit
+staging area dan history akan disimpan dalam folder .git yang tersembunyi
+
+prompt:
+pwd : untuk megetahui lokasi tempat kita bekerja
+ls : untuk melihat direktori di yang ada di lokasi
+cd <file> : untuk berpindah lokasi file tempat bekerja
+cd .. : untuk mundur ke folder sebelumnya
+mkdir <nama file baru> : untuk membuat file baru
+git init : untuk menjadikan file itu menjadi repo agar diawasi git, ditandai tulisan "(master)"
+git status : untuk melihat perubahan yang baru sja terjadi namun belum di commit
+git add <file> : untuk memindahkan status file menjadi di staging area
+git config --global user.name "(nama user) : untuk mendaftar user untuk semua komputer, samakan dengan yang di git hub
+git config --global user.mail "(email) : untuk mendaftar email untuk semua komputer, samakan dengan yang di git hub
+git config --local : untuk mendaftar user local
+git config --list : melihat daftar user
+git commit : jika di enter otomatis akan membuka code editor, digunakan jika kita membuat commit yang panjang
+git commit -m "(perubahan)" : maka file tadi akan di commit secara singkat
+git commit -am : untuk mengcommit file yang belum di staging namun perubahannya hanya modified
+git add . : untuk memindahkan file dari tree ke staging area
+git log : untuk melihat semua perubahan, gunakan Q untuk keluar log
+git log -angka : hanya melihat beberapa
+git log --file : melihat perubahan untuk file tertentu
+git log --all --decorate --oneline --graph : untuk menampilkan perubahan dalam bentuk grafik
+git checkout (5 digit kode) --file : untuk mengembalikan keadaan suatu file tertentu
+git checkout <branch> : berpindah branch 
+git branch : menampilkan ada branch apa aja
+git branch <nama_branch> : membuat branch baru dari file yang commit
+alias "key"="prompt" : untuk membuat alias prompt
+git merge <file lain> : untuk merge file kita dengan file lain
+git branch --merged : untuk cek branch apa yang telah di merge
+git branch -d <branch> : menghapus branch yang sudah di merge
+git branch -D <branch> : menghapus branch yang belum di merge
+git branch <hash> : pindah branch ke commit tertentu, disebut 'detached HEAD', karena sudah tidak lagi di branch master. Maka jika ingin mengerjakan branch harus but lagi branch baru dengan 'git branch <nama branch baru>", lalu melakukan checkout lagi ke branch baru tersebut.
+
+Merge:
+- Fast Forward: Terjadi ketika branch yang akan di merge berada di jalur langsung (direct path)
+- THree-way Merge : ketika branch yang akan di merge tidak ada jalur langsung, maka perlu dilakukan merge sekaligus membuat commit baru
+- Merge Conflict : tidak bisa melakukan merge, karena dua branch mengerjakan baris yang sama, yang harus diselesaikan secara manual
+
+Fork/Forking
+- Membuat 'copy/duplikat' dari repo orang lain (beserta history-nya)
+- Jembatan antara repo original dan duplikatnya
+- Modifikasi terhadap repo original
+- Berkontribusi pada repo orang lain
+- Fork tidak sama dengan Clone
+
+git clone <link copy html repo git> : untuk membuat clone
+git remote : mengeatahui nama remote, secara default origin
+git remote -v : untuk melihat informasi secara lebih detail dari file remote
+git push : untuk melakukan push ke github
+git remote add <nama remote> <link repo github> : untuk membuat repo local kita menjadi remote, setelah membuat repo kosong di github
+git push -u origin master : -u untuk set upstream, jadinya akan push ke remote origin yang branch master
+git fetch : mengecek repo yang ada di remote sudah sampai mana commitnya
+git pull : untuk menarik informasi perubahan dari remote
+
+$env:FLASK_APP="perpus.py"

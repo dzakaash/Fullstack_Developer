@@ -1,0 +1,49 @@
+Flask_SQLAlchemy
+- pip install -U flask_sqlalchemy : menginstall flask-sqalchemy, kemudian simpan sebagai library
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+- cd <direktori> : Pergi ke direktori di mana proyek Flask disimpan
+- python : Memulai interpreter Python
+- from <nama file> import app, db : Mengimpor instance aplikasi Flask (app) dan instance database (db)
+- app.app_context().push() : Menempatkan konteks aplikasi ke dalam app_context, yang memungkinkan kita untuk bekerja dengan aplikasi Flask dalam konteks Shell interaktif
+- db.create_all() : Membuat semua tabel yang didefinisikan oleh model-model dalam database, tempatkan ini di bawah class,
+with app.app_context():
+db.create_all()
+- from alkimia import <nama tabel>, dst : mengimpor tabel-tabel yang sudah dibuat
+- app : Mencetak instance aplikasi Flask, co : <Flask 'alkimia'>, dimana app adalah
+app = Flask(__name__)
+- db : Mencetak instance database SQLAlchemy dengan URI database yang ditentukan, co : <SQLAlchemy postgresql://postgres:12345678@localhost/perpus.db>, dimana db adalah
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12345678@localhost/perpus'
+- <nama class tabel> : Mencetak class tabel yang telah dibuat dalam model, dengan menggunakan fungsi representasi
+def __repr__(self):
+return f'<<nama tabel>: {self.id}>'
+- <nama tabel>.query.all() : Melakukan query untuk mendapatkan semua data dari tabel
+- <nama tabel>.query.first() : mendapatkan semua data yang baru ditambahkan
+- <nama tabel>.query.count() : menghitung jumlah query pada tabel
+- <nama tabel>.query.filter_by(<nama kolom>='<value>').all() : melakukan filter untuk mendapatkan baris yang memenuhi syarat, all() bisa di ganti dengan first() untuk mendapatkan yang terakhir ditambahkan dan count() untuk mendapatkan jumlahnya
+- <key>=<nama tabel>(<nama kolom>=<value>, dst); : melakukan insert pada tabel
+- db.session.add(<key>) : melakukan add value tabel dalam database sementara
+- db.session.add_all([<key>, dst]) : melakukan add beberapa value tabel dalam database sementara
+- db.session.commit() : menyimpan perubahan secara permanen ke dalam database
+- db.session.delete : menghapus suatu objek
+- db.session.rollback() : membatalkan add
+- <nama table>.<nama kolom> : mendapatkan nilai dalam kolom
+- <value>.<nama table2> : mengetahui value tersebut terhubung dengan value apa di tabel 2
+- <value>.<nama table2>.<nama kolom> : mengetahui value tersebut terhubung dengan value apa di kolom tabel 2
+- <value>.<nama table2>[index] : jika terjadi one-to-many, kita mengambil sesuai urutan di index
+- <value>.<nama relasi> : melihat semua value yang berelasi
+- <value>.<nama relasi>.append(<value tabel 2>) : jika many-to-many antara dua tabel dan ingin menghubungkan secara langsung
+- <value>.<nama relasi>.remove(<value tabel 2>) : menghapus value dari hubungan many-to-many
+
+hubungan,
+- <nama hubungan> = db.relationship('<nama tabel2>', back_populates='<nama hubungan di tabel2>') : membuat hubungan pada class tabel many-to-many, maka di tabel2 urutannya terbalik, hubungan di tulis baik di tabel transaksi maupun tabel lain. 
+- <nama hubungan> = db.relationship('<nama tabel 2>', secondary=<key tabel transaction>, backref='<nama hubungan tabel2>'). Dengan struktur tabel transaksi sebagai,
+<key tabel transaction> = db.Table('<nama tabel transaction>', db.column...)
+
+- import uuid : Mengimpor modul uuid untuk membuat public ID yang unik
+- babs_uid=str(uuid.uuid4()) : Membuat UUID (Universal Unique Identifier) baru sebagai public ID
+- babs_uid : mencetak UUID yang dibuat
+
+- from datetime import date : mengimport modul date
+- datetime.utcnow() : mendapatkan tanggal sekarang
+

@@ -1,0 +1,8 @@
+Virtual Environment 
+
+Virtual Environment adalah lingkungan kerja terisolasi yang memungkinkan Anda untuk mengisolasi dependensi dan paket Python untuk setiap proyek Anda. Dalam konteks pengembangan perangkat lunak Python, virtual environment sangat penting karena memungkinkan Anda untuk memiliki versi paket Python yang berbeda dan dependensi yang terisolasi di setiap proyek, tanpa adanya konflik antar mereka.
+
+- pip install virtualenv : menginstal virtualenv package
+- virtualenv myenv : membuat virtual environment baru dengan nama yang di tentukan (misalnya, myenv).
+- myenv\Script\activate : mengaktifkan virtual environment
+- deactivate : keluar dari virtual environment yang aktif

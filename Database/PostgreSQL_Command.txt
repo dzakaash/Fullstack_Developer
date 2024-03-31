@@ -1,0 +1,416 @@
+PostgreSQL Command:
+- psql -U postgres : untuk memulai postgres, nanti akan ada perintah untuk memasukkan paswword dan isi\d\
+- psql -d database -U  user -W : memulai postgres dan masuk ke database tertentu
+- psql -h host -d database -U user -W : untuk memulai postgres dan masuk ke database yang terhubung dengan host lain
+- psql -U user -h host "dbname=db sslmode=require" : menggunakan mode SSL untuk koneksi
+- \? : untuk melihat semua perintah psql yang tersedia
+- \h <queri>: untuk mendapatkan bantuan tentang queri tertentu
+- \timing : untuk mengaktifkan waktu eksekusi kueri
+- \e : untuk menulis queri di editor seperti notepad, dan dijalankan setelah ditutup
+- \ef <nama fungsi>: untuk mengedit fungsi di editor seperti notepad  
+- \c <nama database> : Masuk ke database
+- \! cls : clear prompt
+- \l : untuk melihat list database
+- \g : untuk mengetik kembali perintah sebelumnya
+- \s : untuk melihat riwayat command
+- \s <filename> : untuk menyimpan riwayat perintah ke file
+- \i <filename> : menjalankan perintah dari file
+- \dt : untuk melihat list tabel
+- \dn : untuk melihat list skema database yang terhubung sekarang
+- \df : untuk melihat fungsi
+- \dv : untuk melihat list views saat ini
+- \du : untuk melihat list pengguna
+- \dt+ : untuk melihat list tabel dengan informasi lengkap
+- \d <nama tabel> : melihat list kolom dalam tabel
+- \dD : untuk melihat semua domain
+- \dT : untuk melihat semua tipe
+- \a : perintah beralih dari keluaran kolom selaras ke tidak selaras
+- \H : perintah memformat output ke format HTML
+- \q : untuk keluar dari psql
+
+Postgres dengan Python:
+- pip install psycopg2 : untuk menginstall paket libarary Postgres untuk python
+
+SQL DDL:
+- CREATE DATABASE <nama database> : Membuat database
+- CREATE TABLE <nama table> (<nama kolom> <tipe data><jumlah digit>  , dst) ; : Membuat tabel
+- CREATE TABLE [IF NOT EXIST] <nama table> (<nama kolom> <tipe data><jumlah digit> <batasan kolom> , dst) ; : Membuat tabel, namun jika tabel sudah ada yang dikeluarkan pemberitahuan bukan kesalahan
+- CREATE TABLE <nama table> AS <QUERI, S F...>; : membuat tabel dari select, sama dengan select into 
+- CREATE TEMP TABLE <nama table> AS <QUERI, S F...>; : membuat tabel sementara dari queri, sama dengan select into 
+- CREATE UNLOGGED TABLE <nama table> AS <QUERI, S F...>; : membuat tabel tak tercatat dari queri, sama dengan select into 
+- CREATE TABLE <nama table>(<nama-nama kolom tabel tersebut>) AS <QUERI, S F...>; : membuat tabel dari select, sama dengan select into 
+- CREATE TABLE <nama tabel> AS TABLE <tabel yang sudah ada>; : menyalin tabel dari tabel yang sudah ada, namun tidak menylin contraints data, sehingga harus melakukan alter tabel add constraint
+- CREATE TABLE <nama tabel> AS TABLE <tabel yang sudah ada> WITH NO DATA; : menyalin tabel dari tabel yang sudah ada dengan data kosong
+
+
+DROP
+- DROP DATABASE <nama database> : Mendelete database
+- DROP TABLE [IF EXISTS] <nama tabel> [CASCADE/RESTRICT]; : untuk menghapus tabel, cascade jika ada objek yang bergantung dengan tabel, restrict adalah opsi default jika tidak menentukannya secara eksplisit
+
+TRUNCATE TABLE, menghapus data dalam tabel
+- TRUNCATE TABLE <nama tabel>, dst; melakukan truncate
+- TRUNCATE TABLE <nama tabel> CASCADE; : jika ada objek lain yang terhubung denga tabel
+- TRUNCATE TABLE <nama tabel> RESTART IDENTITY; : menghapus semua bris products tabel dan menyetel ulang urutan yang terkait dengan id kolom
+
+TEMPORARY TABLE, membuat tabel sementara selama sesi database
+- CREATE TEMPORARY TABLE <nama tabel>(nama kolom, dst);
+
+
+CONSTRAINT, Batasan Kolom
+- NOT NULL : memastikan kolom tidak null
+- UNIQUE : memastikan nilai dalam kolom unik di seleuruh baris
+- PRIMARY KEY : kolom kunci utama yang secara unik mengidentifikasi baris dalam tabel. Sebuah tabel dapat memiliki satu dan hanya satu kunci utama.
+- CONSTRAINT <nama konstrain> PRIMARY KEY <kolom 1, kolom 2, dst> : memberi nama pada primary key, jika tidak maka akan diberikan nama default
+- CHECK : Memastikan data harus memenuhi ekspresi boolean, misalnya nilai pada kolom harga harus nol atau positif.
+- FOREIGN KEY(nama kolom) REFERENCES <nama tabel>(nama kolom) : nilai dalam kolom atau sekelompok kolom dari suatu tabel ada di kolom atau kelompok kolom tabel lain.
+- CONSTRAINT <nama konstrain> FOREIGN KEY(<nama kolom>) REFERENCES <nama tabel>(<nama kolom>) : memberi nama pda constraint, ON DELETE <opsi> jika sumber data terhapus maka akan diisi opsi, ON UPDATE <opsi> jika sumber data terupdate maka akan diisi opsi, CASCADE otomatis semua baris referensi di tabel anak terhapus/berubah .
+- DAFAULT <isi default> : untuk membuat isi default, jika null
+
+- INSERT INTO <nama tabel> (<nama kolom>, dst) VALUES (<isi tiap kolom>, dst), (dst), <RETURNING <nama kolom>, untuk menampilkan langsung>; : mengisi tabel 
+- UPDATE <nama tabel> SET <nama kolom>=<isi perubahan> WHERE <nama kolom pk>=<pk>; : untuk melakukan update
+- UPDATE <nama tabel> SET <nama kolom>=<isi perubahan, dipengaruhi data tabel 2> WHERE <nama tabel 1>.<nama kolom pk tabel 1>=<nama tabel 2>.<pk di tabel 1 dan 2>; : mengupdate data dari salah satu tabel menggunakan informasi dari tabel lain
+- DELETE <nama tabel> WHERE <nama kolom pk> = <pk> <RETURNIN <nama kolom>, untuk melihat baris apa yang dihapus>; menghapus baris tertentu di tabel
+- DELETE <nama tabel> WHERE <kondisi> <RETURNIN <nama kolom>, untuk melihat baris apa yang dihapus>; menghapus banyak baris sekaligus yang memenuhi kondisi
+- DELETE FROM <nama tabel>; : menghapus seluruh tabel
+- INSERT INTO <nama tabel> (<nama-nama kolom>) VALUES (<isi dari tiap kolom yang sudah terisi>) ON CONFLICT(<pk>) DO UPDATE SET <nama kolom>=EXCLUDED.<nama kolom>, dst; : untuk melakukan upsert, dimana baris yang isinya sudah ada maka akan digantikan.
+
+
+- ALTER TABLE <nama tabel> RENAME COLUMN <nama kolom awal> TO <nama kolom perubahan>; : merubah nama kolom
+- ALTER TABLE <nama tabel awal> RENAME TO <nama tabel perubahan>; : merubah nama tabel
+- ALTER DATABASE db RENAME TO newdb; : Rename Database
+
+
+SELECT, digunakan untuk menanyakan data dari tabel
+- SELECT version(); : mengambil versi server PostgreSQL saat ini
+- SELECT * FROM <nama tabel>; : untuk membuka tabel, gunakan block sebelum run agar hanya yang diblok yang di run, (*) singkatan untuk semua kolom (namun bukan pilihan jika menggunakan Python, Java, PHP jika jumlah kolomnya sangat banyak)
+- SELECT <nama kolom> FROM <nama tabel> WHERE <nama kolom primary key>=<primry key>; : untuk membuka tabel pada baris dan kolom tertentu
+- SELECT <nama kolom, dst> FROM <nama tabel>; : menampilkan kolom tertentu
+- SELECT <kolom 1>||<kolom 2/karakter> FROM <nama tabel>; : menggunakan (||) untuk menayangkan kolom yang digabungkan
+- SELECT NOW(); : untuk mereturn tanggal dan waktu dari server PostgreSQL
+- SELECT <nama kolom asli> AS <nama kolom yang ingin ditampilkan> FROM <nama tabel>; : merubah nama kolom yang ditampilkan, (AS) bisa dihilangkan. Ini membuat lebih enak dilihat terutama untuk kolom yang digabungkan. Jika nama alias terdiri dari dua kata, dibandingkan dengan (_) bisa gunakan kutip agar tetap bersama.
+- SELECT * FROM <nama tabel> ORDER BY <nama kolom> <'ASC'/'DESC', sesaikan jenis urutan>; : Menampilkan tabel berutan berdasarkan kolom tertentu. nama kolom yang dipakai bisa lebih dari satu, dipisahkan dengan koma, maka diutamakan mengurutkan pada nama kolom pertama setelah itu yang kedua, ini untuk mengurutkan isi kolom yang sama di kolom pertama.
+- SELECT * FROM <nama tabel> ORDER BY <nama kolom> LIMIT <jumlah limit>; : menampilkan tabel hanya beberapa baris
+DELETE FROM <nama tabel> WHERE <nama kolom primary key>=<primary key>; 
+- SELECT <nama kolom>, LENGTH(nama kolom) <nama alias length> FROM <nama tabel> ORDER BY <nama alias length> <'ASC'/'DESC'>; : mengurutkan kolom berdasarkan panjang karakter dari isi kolom.
+- SELECT <nama kolom> FROM <nama tabel> ORDER BY <kolom yang berisi null> <'NULLS FIRST'/'NULLS LAST'>; : untuk mengurutkan kolom jika di kolom itu ada baris yang null(kosong)
+- SELECT DISTINCT <nama kolom1>, <nama kolom2>, dst FROM <nama tabel> ORDER BY <nama kolom1>, <nama kolom2>, dst ; : menghilangkan kemunculan baris yang memiliki nilai yang sama.
+- SELECT <nama kolom> INTO TABLE <nama tabel baru> FROM <nama tabel> WHERE <kondisi>; : membuat tabel dari hasil select, sama dengan create table as
+- SELECT <nama kolom> INTO TEMPORARY/TEMP TABLE <nama tabel baru> FROM <nama tabel> WHERE <kondisi>; : membuat tabel sementara dari hasil select
+
+WHERE, memberi syarat sebelum mereturn baris (filter)
+- SELECT <nama kolom> FROM <nama tabel> WHERE <kondisi> ORDER BY <nama kolom>; : menampilkan tabel berdasarkan kondisi tertentu
+- Kondisi : sama dengan (=), lebih besar dari (>), kurang dari (<), lebih besar sama dengan (>=), lebih kecil sama dengan (<=), tidak sama dengan (<> or !=), dan (AND), or (OR), true jika ada yang nilainya sama di daftar (IN), true jika nilainya ada diantara nilai (BETWEEN <nilai> and <nilai>), true jika nilai cocok dengan suautu pola (LIKE <'nilai'>, tambah (%) di depan atau belakang untuk karakter lainnya, tambah (_) jika hanya satu karakter), true jika nilainya null (IS NULL), menghilangkan hasil dari operator lain (NOT).
+
+BOOLEAN
+- 't', 1, 'true', 'y', 'yes' : true
+- 'f', 0, 'false', 'n', 'no' : false
+- null : kosong, diantara true dan false
+- AND : return true jika keduanya benar, jika 'f' dan 'n' hasilnya 'f'
+- OR : return false jika keduanya false
+
+LIMIT
+- SELECT <nama kolom> FROM <nama tabel> ORDER BY <nama kolom> LIMIT <jumlah baris>; : menampilkan jumlah baris sesuai limit
+- SELECT <nama kolom> FROM <nama tabel> ORDER BY <nama kolom> LIMIT <jumlah baris> OFFSET <baris yang dilewat>; : menampilkan baris sesuai jumlah dan melewati beberapa baris
+- SELECT <nama kolom> FROM <nama tabel> ORDER BY <nama kolom> FETCH <FIRST/NEXT> <jumlah baris> <ROW/ROWS> ONLY; menmpilan beberapa baris
+
+LIKE, filter yang sama
+- LIKE, ~~ : sama
+- ILIKE, ~~* : sama namun tidak peduli huruf besar/kecil
+- % : karakter lainnya
+- _ : satu karakter lainnya
+- NOT LIKE, !~~ : tidak sama
+- NOT ILIKE, !~~* : tidak sama
+- ESCAPE <karakter escape> : digunakan jika terdapat % atau _ di isi tabel
+- REGEXP '^[aeiouAEIOU]': untuk menggantikan or, dimana ^ sebagai batas awalan, jika menjadi batas akhiran maka menggunakan $
+
+
+JOIN, menggabungkan dua tabel
+ON, digunakan untuk membandingkan dua kolom, jika dua kolom memiliki nama sama bisa gunakan USING
+- S F <tabel 1> INNER JOIN <tabel 2> ON <kolom tabel 1> = <kolom tabel 2>; : Irisan
+- S F <tabel 1> LEFT JOIN <tabel 2> ON <kolom tabel 1> = <kolom tabel 2>; : tabel 1 + tabel 2 yang beririsan tabel 1
+- S F <tabel 1> LEFT JOIN <tabel 2> ON <kolom tabel 1> = <kolom tabel 2>; WHERE <kolom tabel 2 PK> IS NULL: menampilkan tabel 1 yang tidak beririsan tabel 2 + tabel 2 kosong
+- S F <tabel 1> RIGHT JOIN <tabel 2> ON <kolom tabel 1> = <kolom tabel 2>; : tabel 2 + tabel 1 yang beririsan tabel 2
+- S F <tabel 1> RIGHT JOIN <tabel 2> ON <kolom tabel 1> = <kolom tabel 2>; WHERE <kolom tabel 1 PK> IS NULL: menampilkan tabel 2 yang tidak beririsan tabel 1 + tabel 1 kosong
+- S F <tabel 1> FULL OUTER JOIN <tabel 2> ON <tabel 1> = <tabel 2>; : tabel 1 + tabel 2, baris yang isinya sama  satu baris
+- S F <tabel 1> FULL JOIN <tabel 2> ON <tabel 1> = <tabel 2> WHERE <kolom tabel 1 PK> IS NULL OR <kolom tabel 2 PK> IS NULL; : tabel 1 + tabel 2 - yang beririsan
+- S <nama alias tabel>.<nama kolom> F <nama tabel> AS <nama alias tabel> : ALIAS digunakan sebagai nama pengganti saat menjalankan Queri, memudahkan jika ingin menampilkan beberapa kolom dari beberapa tabel. Alias juga bisa digunakan untuk melakukan self-join, dimana 2 kolom dalam satu tabel diperbandingkan
+- S F <tabel 1> <CROSS JOIN/(,)> <tabel 2>; : melakukan cross join, artinya semua isi di tabel 1 akan di silangkan dengan semua isi di tabel 2
+
+NATURAL JOIN, menggabungkan berdasarkan isi di tabel yang sama
+- FOREIGN KEY <kolom yang ingin mengambil referensi> REFERENCES <tabel yang menjadi referensi> (<kolom yang menjadi referensi>) : ini menjadi isi saat melakukan creating table
+- S F <tabel 1> NATURAL JOIN <tabel 2>; : melakukan natural join biasa, mengacu kolom yang sama
+- S F <tabel 1> NATURAL LEFT JOIN <tabel 2>; : natural join + tabel di kiri tetap lengkap
+- S F <tabel 1> NATURAL RIGHT JOIN <tabel 2>; : natural join + tabel di kanan tetap lengkap
+
+GROUP BY, menjadikan tiap baris yang sama dalam satu kolom menjadi satu baris.
+- S <nama kolom> F GROUP BY <nama kolom> ORDER BY <nama kolom>; : group by jika hanya satu kolom yang ditampilkan sesuai kolom yang jdi group by
+- S <nama kolom>, <fungsi agregat(nama kolom 2)> F GROUP BY <nama kolom> ORDER BY <nama kolom>; : kolom lain akan ditampilkan hasil fungsi agregatnya dalam baris yng telah dikelompokkan tersebut
+Fungsi agregat, menghitung pada sekumpulan baris dan kembalikan satu baris
+- AVG() : mengembalikan nilai rata-rata, gunakan ROUND(AVG(<nama kolom>), <digit belakang koma>) untuk mengatur belakang koma
+- COUNT() : mengembalikan jumlah nilai
+- MAX() : mengembalikan nilai maksimum
+- MIN() : mengembalikan nilai minimum
+- SUM() : mengembalikan jumlah semua atau nilai yang berbeda
+- TRIM() : menghilangkan spasi putih di depan dan belakang
+- LENGTH() : mengembalikan panjang karakter
+- MOD(<nama kolom>, <bilangan pembagi>) : mengembalikan hasil pembagian
+- FLOOR() : pembulatan ke bawah
+- CEILING() : pembulatan ke atas
+- ROUND() : pembulatan terdekat
+- CONCAT() : menggabungkan (concatenate) dua atau lebih string menjadi satu string
+- IF() :  mengevaluasi suatu kondisi. Jika kondisi yang diberikan terpenuhi, maka fungsi ini mengembalikan nilai pertama, dan jika tidak, maka mengembalikan nilai kedua.
+
+HAVING, memfilter group berdasarkan kondisi tertentu
+- S <nama kolom>, <fungsi agregat(nama kolom 2)> F GROUP BY <nama kolom> HAVING <kondisi>; : baris yang memenuhi filter
+
+UNION, digunakan untuk menggabungkan set hasil dari lebih satu tabel
+- S <kolom sama> F <tabel 1> UNION S <kolom sama> F <tabel 2>; : untuk menggabungkan set hasil dari dua tabel, dengan menjadikan satu baris pada isi yang sama
+- S <kolom sama> F <tabel 1> UNION ALL S <kolom sama> F <tabel 2>; : untuk menggabungkan set hasil dari dua tabel, tanpa menjadikan satu baris pada isi yang sama
+- S <kolom sama> F <tabel 1> UNION ALL S <kolom sama> F <tabel 2> ORDER BY <nama kolom>; : melakukan union dan di sorting
+
+INTERSECT, digunakan untuk hanya menampilkan yang beririsan saja
+- S <kolom sama> F <tabel 1> INTERSECT S <kolom sama> F <tabel 2>; : untuk menggabungkan set hasil dari dua tabel, dengan hanya menmpilkan yang beririsan
+- S <kolom sama> F <tabel 1> INTERSECT S <kolom sama> F <tabel 2> ORDER BY <nama kolom>; : untuk menggabungkan set hasil dari dua tabel, dengan menjadikan satu baris pada isi yang sama dan disorting
+
+EXCEPT, digunakan untuk hanya menampilkan isi tabel satu dikurangin yang beririsan dengan tabel 2
+- S <kolom sama> F <tabel 1> EXCEPT S <kolom sama> F <tabel 2>; : kolom 1 - kolom 2
+- S <kolom sama> F <tabel 1> EXCEPT S <kolom sama> F <tabel 2> ORDER BY <nama kolom>; : kolom 1 - kolom 2, diurutkan
+
+GROUPING SET, menghasilkan beberpa set pengelompokan dalam reporting
+- S <kolom 1>, <kolom 2>, <fungsi agregat(kolom 3)> F <nama tabel> GROUP BY GROUPING SETS ((<kolom 1, kolom 2>), (<kolom 1>), (<kolom 2>), ()); : untuk menggabungkan beberapa group by
+- S GROUPING(<kolom 1/expression>), GROUPING(<kolom 2/expression>), <kolom 1>, <kolom 2>, <fungsi agregat(kolom 3)> F <nama tabel> GROUP BY GROUPING SETS ((<kolom 1, kolom 2>), (<kolom 1>), (<kolom 2>), ()); : untuk menggabungkan beberapa group by, dan untuk kolom grouping di isi dengan 0 jika kolom itu anggota group by dan diisi 1 jika bukan.
+- S <kolom 1>, <kolom 2>, <fungsi agregat(kolom 3)> F <nama tabel> GROUP BY CUBE (<kolom 1>, <kolom 2>); : untuk melakukan grouping sets tanpa perlu menulis semua kemungkinan kombinasi dimensi, sehingga menampilkan total tiap baris yang berbeda2
+- S <kolom 1>, <kolom 2>, <fungsi agregat(kolom 3)> F <nama tabel> GROUP BY ROLLUP (<kolom 1>, <kolom 2>); : untuk melakukan grouping sets tanpa perlu menulis semua kemungkinan kombinasi dimensi, namun mengurangi beberapa kombinasi yang tidak ada kolom 1
+
+Subquery, kueri yang ditumpuk dalam kueri lain
+- S <kolom 1> F WHERE <kolom 2> = (S <kolom 2> F WHERE <kondisi>); : menghasilkan tabel yang memenuhi syarat, dimana syaratnya terikat dengan hasil tabel lain yang berupa satu baris.
+-  S <kolom 1> F WHERE <kolom 2> IN (S <kolom 2> F WHERE <kondisi>); : menghasilkan tabel yang memenuhi syarat, dimana syaratnya terikat dengan hasil tabel lain yang lebih dari satu baris.
+-  S <kolom 1> F <tabel> <nama alias tabel> WHERE <kolom 2> <karakter kondisi> (S <fungsi agregat(kolom 2)> F WHERE <kolom 3> <karakter fungsi> <nama alias tabel>.<kolom 3>); : disini subquery yang didalam memiliki hubungan dengan kueri utama.
+- S F <tabel 1> WHERE <kolom 1> <karakter kondisi> ANY ( S <kolom 1> FROM <tabel 1>); : menghasilkan tabel yang memenuhi syarat, dimana syaratnya terikat dengan hasil tabel lain yang lebih dari satu baris, dalam perbandingan OR.
+- S F <tabel 1> WHERE <kolom 1> <karakter kondisi> ALL ( S <kolom 1> FROM <tabel 1>); : menghasilkan tabel yang memenuhi syarat, dimana syaratnya terikat dengan hasil tabel lain yang lebih dari satu baris. dalam perbandingan AND.
+S F <tabel 1> WHERE EXIST ( S <kolom 1> FROM <tabel 1> WHERE <kondisi>); : EXIST adalah karakter kondisi yang akan mengembalikan "true or false", true jika ada brisnya, false jika tidak ada barisnya, namun jika hanya satu kolom yang null maka akan tetap true.
+
+Common Table Expression, digunakan untuk memanggil suatu tampilan tabel dengan menjadikannya satu paket yang bisa dipanggil dengan lebih singkat
+- WITH <nama cte> AS (S F W) S F <nama cte>; : contoh cte, jika ada nama cte itu sendiri di dalam tampilan yang dipakai maka disebut cte recursive
+
+Transaction, untuk melakukan transaksi
+- BEGIN;, BEGIN WORK;, BEGIN TRANSACTION; : memulai transaksi
+- COMMIT; COMMIT WORK;, COMMIT TRANSACTION; : menerapkan perubahan
+- ROLLBACK;, ROLLBACK WORK;, ROLLBACK TRANSACTION; : mengembalikan perubahan sebelum dilakukan commit
+
+
+- \COPY persons(<nama kolom>, dst) FROM '<lokasi file csv>' DELIMITER ',' CSV HEADER; : Import from CSV
+
+Tipe Data,
+Boolean
+- 't', 1, 'true', 'y', 'yes' : true
+- 'f', 0, 'false', 'n', 'no' : false
+- null : kosong, diantara true dan false
+
+Karakter
+- CHAR(n), panjang tetap, jika kurang diisi spasi, jika lebih maka akan salah
+- VARCHAR(n), panjang variabel
+- TEXT, dengan panjang variabel dan panjangnya tidak terbatas
+
+Numerik,
+Bilangan Bulat
+- SMALLINT, 2 byte, rentang dari -32.768 hingga +32.767
+- INT, 4 byte, rentang dari -2,147,483,648 hingga +2,147,483,647.
+- BIGINT, 8 byte, rentang dari -9,223,372,036,854,775,808 hingga +9,223,372,036,854,775,807
+- NaN, not-a-number, NaN akan setara dengan NaN juga, dan akan lebih besar dari bilangan apapun
+
+- SERIAL, sama dengan integer namun otomatis dimasukkan ke serial kolom, mirip dengan AUTOINCREMENT/AUTO_INCREMENT
+
+
+Float
+- float(n), bilangan floating-point yang paling sedikit dan maksimum 8 byte.
+- real/float8, bilangan floating-point 4 byte.
+- numeric/numeric(p, s), bilangan real dengan angka p dan s setelah koma, sehingga untuk angka pastinya
+
+Data sementara
+DATE, tanggal saja rentang dari 4713 SM hingga 5874897 AD, format yyyy-mm-dd
+- SELECT NOW(); : mendapatkan tanggal saat ini, beserta jam dan zona waktunya
+- SELECT NOW()::date; : mendapatkan tanggalnya saja
+- SELECT CURRENT_DATE; : mendapatkan tanggalnya saja
+- SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy'); : membuat format tanggal yang berbeda
+- NOW() - <nama kolom> as <nama kolom baru> : mengetahui selisih waktu antara nilai kolom dan tanggal sekarang
+- AGE(<nama kolom tanggal lahir>) : mendapatkan umur
+- AGE('<tanggal yang ingin diselisih>', <nama kolom tanggal lahir>) : melakukan selisih tanggal lahir dengan tanggal tertentu
+- EXTRACT (YEAR FROM <kolom tanggal>) AS YEAR : mengekstrak tahun
+- EXTRACT (MONTH FROM <kolom tanggal>) AS MONTH : mengekstrak bulan
+- EXTRACT (DAY FROM <kolom tanggal>) AS DAY : mengekstrak hari
+
+TIME, nilai waktu dalam sehari
+format time :
+- HH:MI   
+- HH:MI:SS
+- HHMISS
+tambahkan .pppppp agar lebih presisi
+- <nama kolom> TIME : format kolom tanpa zona waktu
+- <nama kolom> TIME WITH TIME ZONE : format kolom dengan zona waktu
+- SELECT CURRENT_TIME(<presisi>); : mendapatkan waktu sekarang dengan sesuai zona waktu, isi presisi dengan jumlah angka di belakang yang diinginkan
+- SELECT LOCALTIME(<presisi>); : untuk mendapatkan waktu lokal, isi presisi dengan jumlah angka di belakang yang diinginkan
+- SELECT <waktu sesuai format dengan zona waktu> AT TIME ZONE <zona waktu, co: UTC-7>; : merubah waktu ke zona waktu tertentu
+- EXTRACT(HOUR/dsb FROM <waktu dengan format tertentu>); : mengekstrak waktu
+- SELECT time '<jam dengan format tertentu>' - time '<jam dengan format tertentu>' AS <nama kolom>; : mendapatkan interval waktu 
+
+TIMESTAMP, stempel waktu tanpa zana waktu
+TIMESTAMPTZ, stempel waktu sadar zona waktu
+- SET timezone = '<nama negara>/<nama kota>'; : menyeting zona waktu berdasarkan kota tertentu
+- SHOW TIMEZONE; : melihat zona waktu saat ini
+- SELECT CURRENT_TIMESTAMP; : menampilkan stempel waktu saat ini
+-SELECT TIMEOFDAY(); : menampilkan stempel waktu saat ini dengan format string
+- SELECT TIMEZONE('<nama negara>/<nama kota>','yyyy-mm-dd hh:mm'); : mengkonfersi waktu ke zona tertentu dari zona waktu kita sekarang, cek dengan show timezone()
+- CREATE OR REPLACE FUNCTION <nama fungsi update>()
+RETURNS TRIGGER AS $$ BEGIN NEW.<nama kolom update> = current_timestamp; RETURN NEW; END; $$ LANGUAGE plpgsql; CREATE TRIGGER department_updated_at_trigger BEFORE UPDATE ON <nama tabel> FOR EACH ROW EXECUTE FUNCTION <nama kolom update>(); : memperbarui kolom update, setelah kolom update memiliki format <nama kolom update> TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+
+INTERVAL, memungkinkan untuk manipulasi periodedalam tahun, bulan, hari, jam, menit, dan detik
+- NOW() - INTERVAL '<waktu sesuai format>' AS <nama kolom>; : mendapatkan interval waktu antara tanggal tertentu dengan sekarang justifydays dan justifyhours dengan penyesuaian tanda tambahan
+- TO_CHAR(INTERVAL '<waktu sesuai format>', 'HH24:MI:SS' : merubah format waktu menjadi string
+- SELECT EXTRACT (MINUTE/dsb FROM INTERVAL 'waktu sesuai format'); : mengekstrak bagian waktu tertentu
+- SELECT <nama kolom justofy interval>(interval '<wktu dalam format tertentu> -/dsb <waktu dalam format tertentu>'); : menyesuaikan interval menggunakan 
+format waktu :
+- Standar SQL : +y -m +d +h:mm:ss
+- Postgres : <y> years <m> mons <d> days hh:mm:ss
+- Postgres Verbose : @ <y> years <m> mons <d> days <h> hours <m> mins <s> sec
+- ISO_8601 : P<y>Y<m>M<d>DT<h>H<m>M<s>S
+
+
+ARRAY, kumpulan elemen yang memiliki tipe data yang sama, ini bisa berupa array string, array integer, dll.
+- <nama kolom> <tipe data> [] : membuat kolom, tambahkan [] jika ingin menambah dimensi
+- INSERT INTO <nama tabel> (<nama kolom arrat>, dst) VALUES(ARRAY [ '<nilai kolom>', dst ]); : untuk mengisi insert, korong siku bisa diganti kurung kurawal
+- SELECT <nama kolom array> [ <indeks> ] FROM <nama tabel>; : mendpatkan nilai array dalam indeks tertentu
+- S F WHERE <nama kolom array> [ <indeks> ] = '<nilai kolom array yang dicari>'; mendapatkan kolom dengan mencari isi array dengan indeks tertentu
+- S F WHERE <nilai isi kolom array> = ANY '<nama kolom>'; mendapatkan baris dengan isi dari kolom array
+- UPDATE <nama tabel> SET <nama kolom> [<indeks>] = '<nilai baru>' WHERE ID = <nilai id> RETURNING *; : melakukan update pada kolom dengan indeks tertentu, jika tidak diberi indeks maka nilai di kolom array itu akan berubah semua
+- SELECT unnest(<nama kolom array>) FROM <nama tabel>; : membuat baris baru untuk setiap isi array
+
+JSON/JSONB, JSON masih perlu penguraian, sedangkan JSONB dalam format bienr yang lebih cepat diprose namun lebih lambat dimasukkan
+- <nama kolom> JSON/JSONB : membuat kolom JSON
+- INSERT INTO <nama tabel>(<nama kolom json>, dst) VALUES('{"<key>": "<value>", dst) RETURNING *; L memasukkan nilai json ke baris tertentu
+- SELECT <nama kolom> -> '<key>' <nama kolom tampil> FROM <nama tabel>; : menampilkan nilai dari kunci tertentu, jika menggunakan ->> maka objeknya di ekstrak, jika key diganti angka maka angka itu berperan sebagai indeks untuk key yang berisi nilai array
+- SELECT <nama kolom> ->> '<key>' <nama kolom tampil> FROM <nama tabel> WHERE <nama kolom> ->> '<key>' IN ('<value>', dst); : untuk mengambil baris yang json nya berisi nilai tertentu
+
+UUID, rangkaian 32 digit angka heksadesimal yang direpresentasikan dalam kelompok yang dipisahkan oleh tanda hubung. memungkinkan untuk menyimpan pengidentifikasi unik universal yang ditentukan oleh RFC 4122, keunikannya lebih baik daripada SERIAL, dan dapat digunakna untuk menyimpan data sensitif yang terekspos ke pebulik seperti nilai-nilai id di URL.
+- SELECT gen_random_uuid() : mendapatkan nilai UUID
+
+
+HSTORE, tipe data yang menyimpan pasangan key-value, key dan value hanya berupa string teks, pasangan kunci-nilai dipisahkan denga =>
+- CREATE EXTENSION hstore; : untuk mengaktifkan ekstensi hstore
+- <nama kolom> HSTORE : membuat tipe kolom menjadi hstore
+- SELECT <nama kolom> -> '<kunci>' AS <nama kolom yg tampil> FROM <nama tabel; : mendapatkan nilai dari kunci tertentu
+- SELECT <nama kolom> -> '<kunci>' AS <nama kolom yang tampil> FROM <nama tabel> WHERE <nama kolom> -> '<key>' = '<value>'; : memfilter baris yang berisi pasangan key-value tertentu
+- UPDATE <nama tabel> SET <nama kolom> = <nama kolom> || '"<kunci baru>"=>"<value>"' :: hstore; : menambah key-value di seluruh baris
+- UPDATE <nama tabel> SET <nama kolom> = delete(<nama kolom>, '<key>'); : menghapus pasangan key-value tertentu
+- SELECT <nama kolom>->'<key>' as <nama kolom terlihat> FROM <nama tabel>
+WHERE <nama kolom> ? '<key>'; : untuk memerikasa kunci tertentu di kolom hstore
+- S F WHERE <nama kolom> @> '"<key>"=>"<value>"' :: hstore; : untuk memerikasa kunci tertentu
+- S F WHERE <nama kolom> ?& ARRAY ['<kunci>',dst]; : untuk memerikasa beberapa kunci tertentu
+- SELECT akeys (<nama kolom hstore>) FROM <nama tabel>; mendatkan seluruh kunci dalam satu baris
+- SELECT skeys (<nama kolom hstore>) FROM <nama tabel>; mendatkan seluruh kunci dalam baris terpisah
+- SELECT avals (<nama kolom hstore>) FROM <nama tabel>; mendatkan seluruh nilai dalam satu baris
+- SELECT svals (<nama kolom hstore>) FROM <nama tabel>; mendatkan seluruh nilai dalam baris terpisah
+- SELECT hstore_to_json (<nama kolom>) <nama kolom tmapil> FROM <nama tabel>; : merubah format hstore ke json
+- SELECT (EACH(attr) ).* FROM <nama tabel>; : mendapatkan pasangan key-value dalam bari terpisah
+
+Tipe data khusus
+- box, kotak persegi panjang.
+- line, satu set poin.
+- point, sepasang bilangan geometris.
+- lseg, ruas garis.
+- polygon, geometri tertutup.
+- inet, alamat IP4.
+- macaddr, alamat MAC.
+
+SERIAL, tipe data yang langsung mengisi secara berurutan
+- SELECT currval(pg_get_serial_sequence('<nama tabel>', '<nama kolom serial >'));: untuk mengetahui nilai serial terakhir
+- INSERT INTO <nama tabel>(<nama kolom>) VALUES (<nilai>) RETURNING id; : mengembalikan id terakhir
+- ALTER TABLE <nama tabel> ADD COLUMN id SERIAL PRIMARY KEY; : menabah kolom serial ke tabel yang sudah ada
+
+SEQUENCE, menghasilkan bilangan berurutan yang unik
+- CREATE SEQUENCE [ IF NOT EXISTS ] sequence_name
+    [ AS <SMALLINT/INT/BIGINT> ] : menentukan tipe data
+    [ INCREMENT [ BY ] <increment> ] : menentukan selisih
+    [ MINVALUE <minvalue> / NO MINVALUE ] : nilai minimal
+    [ MAXVALUE <maxvalue> / NO MAXVALUE ] : nilai maksimum
+    [ START [ WITH ] <start> ] : nilai mulai
+    [ CACHE <cache> ] : banyak nomor urut yang dialokaskan sebelumnya dan disimpan di memori, agar akses lebih cepat 
+    [ [ NO ] CYCLE ] : memulai ulang jika batasnya tercapai
+    [ OWNED BY { <table_name>.<column_name> | NONE } ] : mengaitkannya dengan kolom tabel tertentu
+- SELECT nextval('<nama sequence>'); : menampilkan hasil sequence
+- INSERT INTO <nama tabel>(<nama kolom yang terkait sequence>, dst) VALUES (<nextval('nama sequence')>, dst); : pada bagian ini maka kolom akan terisi otomatis sesuai dengan dequence yang dibuat
+- SELECT relname sequence_name FROM pg_class WHERE relkind = 'S'; : menampilkan list sequence yang ada sekarang
+- DROP SEQUENCE <IF EXISTS> <nama sequence>, dst; : menghpus sequence tertentu
+- DROP SEQUENCE <IF EXISTS> <nama sequence>, dst <CASCADE/RESTRICT>; : menghpus sequence tertentu yang bergantung pada urutan secara rekursif
+
+GENERATE AS IDENTITY, untuk menetapkan nomor unik secara otomatis
+- <nama kolom> <tipe data numerikal> GENERATED <ALWAYS/BY DEFAULT> AS IDENTITY<(opsi sequence)> : informasi kolom untuk menjadikanya generate as identity, ALWAYS artinya tidak bisa digantikan dengan insert lainnya, DEFAUL artinya generate identity hanya sebagai opsi default
+- ALTER TABLE <nama tabel> ALTER COLUMN <nama kolom> ADD GENERATED <ALWAYS/BY DEFAULT> AS IDENTITY <(opsi sequence)> : mengubah tipe kolom menjadi generate as identity, atau dari antara always dan by default
+- ALTER TABLE <nama tabel> ALTER COLUMN <nama kolom> DROP IDENTITY [IF EXISTS] : menghapus batasan identity dri kolom
+
+
+ALTER TABLE, mengubh struktur yng ada
+- ALTER TABLE <nama tabel> ADD COLUMN <nama kolom> <tipe data> <kolom konstrain>; menambah kolom
+- ALTER TABLE <nama tabel> DROP COLUMN <nama kolom>; : menghapus kolom, tambahkan CASCADE yang terhubung dengan subjek dependen, IF EXISTS agar mendapat pemberitahuan jika kolom tidak ada
+- ALTER TABLE <nama tabel> RENAME COLUMN <nama kolom lama> TO <nama kolom baru>
+- ALTER TABLE <nama tabel> ALTER COLUMN <nama kolom> <SET DEFAULT value/DROP DEFAULT>; : untuk membuat kolom memiliki nilai default atau menghapusnya
+- ALTER TABLE <nama tabel> ALTER COLUMN <nama kolom> <SET NOT NULL/DROP NOT NULL>; : untuk membuat kolom memiliki batasan not null, atau menghapusnya
+- ALTER TABLE <nama tabel> ALTER COLUMN <nama kolom> TYPE <tipe data baru>; : merubah tipe data kolom
+- ALTER TABLE <nama tabel> ADD CHECK <ekspresi>; : menambahkan batasan check, artinya kolom yang diisi tidak sesuai ekspresi maka akan mengembalikan kesalahan
+- ALTER TABLE <nama tabel> ADD CONSTRAINT <nama konstrain> <deskripsi konstrain>; : menambahkan batasan konstrain
+- ALTER TABLE <nama tabel> DROP CONSTRAINT <nama constraint>; : menghapus batasan contraint, jika tidak tahu namanya maka cek dengan \d, karena terisi default saat constraint dibuat
+- ALTER TABLE <nama tabel> RENAME TO <nama baru tabel>; : merubah nama tabel
+
+UNIQUE, membuat batasan nilai di kolom tidak ada yang sama
+- UNIQUE(nama kolom, dst) : jika ada banyak kolom
+- CREATE UNIQUE INDEX <index unique> ON <nama tabel>(<nama kolom>); : membuat unique index 
+
+
+DOMAIN,
+- CREATE DOMAIN <nama domain> AS <tipe data dan kondisi> : untuk membuat domain, yang nanti bisa ditulis langsung setelah menulis nama kolom, untuk menggantikan menulis kolom yang memerlukan kondisi
+- SELECT typname FROM pg_catalog.pg_type JOIN pg_catalog.pg_namespace ON pg_namespace.oid = pg_type.typnamespace WHERE typtype = 'd' and nspname = '<schema_name>'; : untuk mendapatkan semua domain dalam skema tertentu, biasanya kita hanya melihat skema 'public' saja
+
+TYPE,
+- CREATE TYPE <nama tipe data> AS (<nama kolom dan tipe datanya>, dst);  membuat paket tipe data
+- CREATE OR REPLACE FUNCTION <nama fungsi> (<nama kolom primary key> INT) RETURNS <nama tipe data> AS $$ SELECT film_id, title, release_year FROM film WHERE film_id = f_id ; $$ LANGUAGE SQL; : membuat nama fungsi
+- SELECT * FROM <nama fungsi> (<primary key>); : mengembalikan baris dari fungsi tertentu yang memenuhi fungsi dan tipe datanya
+
+CASE, adalah ekspresi yang sama dengan IF/ELSE statement, ditulis sebagai CONSTRAINT
+- CASE WHEN <kondisi> THEN <hasil> ELSE <hasil jika tidak terpenuhi, jika ini tidak ada maka NULL> WHEN... END AS <nama kolom> : unuk membuat case
+
+COALESCE(), menerima banyak argumen dan mengembalikan argumen pertama dari kiri yang bukan nol
+- SELECT COALESCE (<argumen 1>, dst); : mengembalikan argumen bukan nol pertama, berguna jika kita memiliki isi kolom NULL yang bisa kita ganti dengan 0
+
+NULLIF(), mengembalikan null jika argumen1 dan argumen2 sama
+ 
+CAST, merubah tipe data nilai
+- CAST(<nilai> AS <tipe data>);
+- CAST<value>::<tipe data>
+
+EXCEPT, untuk membandingkan dua tabel
+- S <nama kolom>, <'not in <nama tabel>'> as <nama kolom penanda> F <nama tabel 1> EXCEPT S <nama kolom>, <'not in <nama tabel>'> as <nama kolom penanda> F <nama tabel 2>; untuk bandingkan isi tabel
+- S F <tabel 1> FULL OUTER JOIN <tabel 2> USING(<kolom sama>) WHERE <tabel1>.<kolom sama> IS NULL OR <tabel2>.<kolom sama> : opsi membandingkan menggunakan outer join
+
+Mengahapus Duplikat
+- SELECT COUNT(<nama kolom>) FROM <nama tabel> GROUP BY <nama kolom HAVING COUNT( <nama kolom> )> 1 ORDER BY <nama kolom>; : mengecek berapa baris yang memiliki nilai yang sama dalam kolom
+- DELETE FROM <tabel 1> USING <tabel 2> WHERE <tabel 1>.id < <tabel 2>.id AND <tabel 1>.<kolom sama> = <tabel 2>.<kolom sama>; : untuk melakukan delete duplikat
+- DELETE FROM <nama tabel> WHERE id IN (SELECT id FROM (SELECT id, ROW_NUMBER() OVER( PARTITION BY column_1, column_2 ORDER BY  id ) AS row_num FROM <nama tabel> ) t WHERE t.row_num > 1 ); : untuk melakukan delete duplikat menggunakan fungsi
+
+Mendpatkan angka random
+- SELECT random(); : mendpatkan nilai random antara 0 - 1
+- SELECT random() * 10 + 1 AS RAND_1_11; : mendapatkan nilai random antara 1 - 11
+- SELECT floor(random() * 10 + 1)::int; : mendapatkan nilai random bilangan bulat antara 1 - 11
+- SELECT floor(random() * (high-low+1) + low)::int; : mendapatkan nilai random bilangan bulat antara low - high
+- CREATE OR REPLACE FUNCTION <nama fungsi random>(low INT ,high INT RETURNS INT AS $$ BEGIN RETURN floor(random()* (high-low + 1) + low); END; $$ language 'plpgsql' STRICT; : membuat fungsi random
+
+EXPLAIN, menjelaskan rencana eksekusi psql untuk mengenerate
+- EXPLAIN [ (option [...]) ] Queri;
+option : 
+- ANALYZE [ boolean ]
+- VERBOSE [ boolean ]
+- COSTS [ boolean ]
+- BUFFERS [ boolean ]
+- TIMING [ boolean ]  
+- SUMMARY [ boolean ]
+- FORMAT { TEXT | XML | JSON | YAML }
+
