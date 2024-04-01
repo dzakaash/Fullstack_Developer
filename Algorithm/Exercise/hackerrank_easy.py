@@ -1259,32 +1259,38 @@
 
 # No. 64 Chocolate Feast, https://www.hackerrank.com/challenges/chocolate-feast/problem?isFullScreen=true
 # def chocolateFeast(n, c, m):
-#     feast = int(n/c) #disini kita pertama kali menghitung berap banyak coklat yang didapat
-#     least = int(n%c) #disini kita hitung uang sisanya
-#     count = feast #disini kita hitung total coklatnya
-#     while int((feast + least)/m) > 0:
-#         feast, least = int((feast + least)/m), int((feast + least)%m)
-#         count += feast
-#     return count
+#     wrappers = n//c #disini kita dapatkan berapa coklat pertama yang didapat dari uang
+#     bar = n//c #disini kita akan hitung jumlahnya
+#     while True: #ini adalah batasan looping, kita akan berhenti jika bungkus coklat yang kita punya sudah tidak cukup ditukar lagi
+#         if wrappers < m:
+#             break
+#         bar = bar + (wrappers // m) #pertama kali kita langsung jumlahkan, jumlah sebelumnya dengan jumlah coklat bonus yang didapat
+#         wrappers = (wrappers // m) + (wrappers % m) #disini kita akan dapat sisa bungkus coklat, dengan jumlah coklat bonus yang didapat ditambah bungkus coklat yang belum kita tukarkan
+#     return int(bar)
 
 # print(chocolateFeast(16809, 123, 11668)) #136
 # print(chocolateFeast(12, 4, 4)) #3
 # print(chocolateFeast(6, 2, 2)) #5
 
-def isPower(arr):
-    # Write your code here
-    result = []
-    for num in arr:
-        num_t = num
-        while num_t >= 1:
-            num_t = (num_t)*0.5
-            if num_t != int(num_t):
-                result.append(0)
-                num_t = 0
-            elif num_t == int(num_t):
-                if num_t == 1 or num_t == 2:
-                    result.append(1)
-                    num_t = 0
+# def isPower(arr):
+#     # Write your code here
+#     result = []
+#     for num in arr:
+#         num_t = num
+#         while num_t >= 1:
+#             num_t = (num_t)*0.5
+#             if num_t != int(num_t):
+#                 result.append(0)
+#                 num_t = 0
+#             elif num_t == int(num_t):
+#                 if num_t == 1 or num_t == 2:
+#                     result.append(1)
+#                     num_t = 0
                     
-    return result
-print(isPower([2, 3, 4])) #1, 0, 1
+#     return result
+# print(isPower([2, 3, 4])) #1, 0, 1
+
+#65. Service-Line, https://www.hackerrank.com/challenges/service-lane/problem?isFullScreen=true
+# diberikan array lebar pda titik di sepanjang jalan
+# diberikan daftar indeks titik masuk dan keluar
+# dengan mempertimbangkan setiap pasangan titik masuk dan keluar, hitung ukuran maksimum kendaraan yang dapat melewati segmen jalur pelayaran tersebut dengan aman

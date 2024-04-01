@@ -1,0 +1,90 @@
+Quotree Project
+
+Aplikasi untuk pengguna mendapatkan quote yang relate dengan dirinya
+- Kita bisa melihat list Quote berdasarkan kategori, penulis, profesi penulis
+- Kita juga bisa melihat quote secara random sesuai kategori dan penulis
+- Kita bisa melihat Quote yang paling trending, dimana paling banyak yang setuju ataupun paling banyak tidak setuju
+
+pengguna bisa search Quote berdasarkan kata tertentu
+
+Pengguna melakukan login
+
+Pengguna bisa mengikuti kategori dan penulis tertentu
+
+Pengguna bisa menjadi penulis
+
+Pengguna bisa mengirimkan Quote oleh penulis lain yang bukan seorang user, dan nanti akan ditinjau oleh admin apakah quote itu benar ada atau tidak
+
+Jika penulis resmi itu mendaftar menjadi user, maka akan dilakukan verifikasi, dan semua Quote yang ada otomatis akan ada di profil user tersebut 
+
+Pengguna hanya memberikan tanggapan berupa komentar setuju atau tidak setuju dengan Quote tersebut
+
+Komentar pengguna akan ada di profil pengguna
+
+Kementar pengguna bisa diberikan setuju dan tidak setuju oleh pengguna lain
+
+catatan : 
+- kategori bukan hanya Quote bijak saja, tapi juga bisa kata-kata humor dan rayuan
+- penulis bisa saja tokoh fiksi, maka quote itu akan menjadi quote yang ditulis oleh tokoh fiksi itu dan juga penulis tokoh fiksi tersebut
+- Quote dari kitab suci tidak akan mendapatkan komentar tidak setuju, hanya komentar setuju
+
+pengembangan kedepan :
+- User bisa membuatkan Quote berbentuk gambar untuk Quote yang ada
+
+
+-------------------------------
+Dekomposisi
+
+Buat table untuk Quote dengan atribut:
+- id, pakai uuid
+- Quote
+- Kategori, fk ke table Kategori
+- Penulis, fk ke table Penulis
+- Tahun
+- waktu, jika dari user
+- Sumber, jika dari buku atau film
+
+Buat table untuk Kategori, dengan atribut:
+- id
+- Kategori
+
+Buat table untuk Penulis, dengan atribut:
+- id, pakai uuid
+- Nama
+- Email
+- Profesi
+- Negara
+- Tahun Lahir
+
+Buat table profesi_penulis, dengan atribut:
+- id
+- profesi
+
+Buat table negara, dengan atribut:
+- id
+- Negara
+
+Buat table komentar setuju dan tidak setuju, yang terhubung dengan Quote tertentu, atribut:
+- id, uuid
+- id Quote
+- id Users
+- Komentar
+
+Buat sistem login, dan arahkan pengguna agar bisa mengakses beberapa fitur
+- Melihat daftar Quote yang dia tulis
+- Melihat daftar Quote dari kategori yang dia ikuti
+- Melihat daftar Quote dari penulis yang dia ikuti
+- Melihat Quote trending
+- Melihat Quote random berdasarkan kategori dan penulis yang dia ikuti
+- Melihat Quote yang direkomendasikan Algoritma
+- Melihat daftar penulis berdasarkan profesi tertentu 
+- Melihat daftar penulis berdasarkan negara tertentu
+- Melakukan komentar setuju dan tidak setuju terhadap Quote tertentu
+
+catt : 
+- di endpoint melihat quote buat juga informasi berapa banyak yang memberikan agree dan disagree
+- di endpoint follow quote, selesaikan atribut follow categories dan author lain
+
+Buat sistem logout
+
+

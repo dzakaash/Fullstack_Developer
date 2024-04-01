@@ -266,7 +266,7 @@ RETURNS TRIGGER AS $$ BEGIN NEW.<nama kolom update> = current_timestamp; RETURN 
 
 INTERVAL, memungkinkan untuk manipulasi periodedalam tahun, bulan, hari, jam, menit, dan detik
 - NOW() - INTERVAL '<waktu sesuai format>' AS <nama kolom>; : mendapatkan interval waktu antara tanggal tertentu dengan sekarang justifydays dan justifyhours dengan penyesuaian tanda tambahan
-- TO_CHAR(INTERVAL '<waktu sesuai format>', 'HH24:MI:SS' : merubah format waktu menjadi string
+- TO_CHAR(INTERVAL '<waktu sesuai format>', 'HH24:MI:SS') : merubah format waktu menjadi string
 - SELECT EXTRACT (MINUTE/dsb FROM INTERVAL 'waktu sesuai format'); : mengekstrak bagian waktu tertentu
 - SELECT <nama kolom justofy interval>(interval '<wktu dalam format tertentu> -/dsb <waktu dalam format tertentu>'); : menyesuaikan interval menggunakan 
 format waktu :
@@ -287,7 +287,7 @@ ARRAY, kumpulan elemen yang memiliki tipe data yang sama, ini bisa berupa array 
 
 JSON/JSONB, JSON masih perlu penguraian, sedangkan JSONB dalam format bienr yang lebih cepat diprose namun lebih lambat dimasukkan
 - <nama kolom> JSON/JSONB : membuat kolom JSON
-- INSERT INTO <nama tabel>(<nama kolom json>, dst) VALUES('{"<key>": "<value>", dst) RETURNING *; L memasukkan nilai json ke baris tertentu
+- INSERT INTO <nama tabel>(<nama kolom json>, dst) VALUES('{"<key>"}: "<value>", dst) RETURNING *; L memasukkan nilai json ke baris tertentu
 - SELECT <nama kolom> -> '<key>' <nama kolom tampil> FROM <nama tabel>; : menampilkan nilai dari kunci tertentu, jika menggunakan ->> maka objeknya di ekstrak, jika key diganti angka maka angka itu berperan sebagai indeks untuk key yang berisi nilai array
 - SELECT <nama kolom> ->> '<key>' <nama kolom tampil> FROM <nama tabel> WHERE <nama kolom> ->> '<key>' IN ('<value>', dst); : untuk mengambil baris yang json nya berisi nilai tertentu
 
