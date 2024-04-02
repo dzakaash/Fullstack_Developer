@@ -70,20 +70,28 @@ Buat table komentar setuju dan tidak setuju, yang terhubung dengan Quote tertent
 - id Users
 - Komentar
 
-Buat sistem login, dan arahkan pengguna agar bisa mengakses beberapa fitur
-- Melihat daftar Quote yang dia tulis
-- Melihat daftar Quote dari kategori yang dia ikuti
-- Melihat daftar Quote dari penulis yang dia ikuti
-- Melihat Quote trending
-- Melihat Quote random berdasarkan kategori dan penulis yang dia ikuti
-- Melihat Quote yang direkomendasikan Algoritma
-- Melihat daftar penulis berdasarkan profesi tertentu 
-- Melihat daftar penulis berdasarkan negara tertentu
-- Melakukan komentar setuju dan tidak setuju terhadap Quote tertentu
+Beberapa fitur yang bisa dlakukan:
+1. login
+2. log-out
+3. Sign-Up Author
+4. Melihat profil Author sendiri
+5. Membuat Quote
+6. Melihat daftar Quote yang dia tulis
+7. Melihat profil Author lain
+8. Melihat Quote Author lain
+9. Mengikuti Author lain
+10, Meng Unfollow author yang dia ikuti
+11. Melihat Page Quote yang berisi Quote dari penulis yang dia ikuti, diurutkan berdasarkan date posting dari yang terbaru
+12. Melihat Page Quote dari kategori yang dia suka, diacak secara random urutannya, yang ditampilkan hanya dari yang belum dia agree atau disagree
+13. Melihat Quote trending, diurutkan dari yang paling banyak agree atau disagree nya
+14. Melihat daftar penulis berdasarkan profesi tertentu 
+15. Melihat daftar penulis berdasarkan negara tertentu
+16. Melakukan komentar agree atau disagree terhadap Quote tertentu
 
 catt : 
 - di endpoint melihat quote buat juga informasi berapa banyak yang memberikan agree dan disagree
 - di endpoint follow quote, selesaikan atribut follow categories dan author lain
+- login ubah dapatkan username dan password nya dari basic auth
 
 Buat sistem logout
 
