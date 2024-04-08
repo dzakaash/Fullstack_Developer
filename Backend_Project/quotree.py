@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -36,6 +36,7 @@ class Categories(db.Model):
     categories = db.Column(db.String, unique = True, nullable = False)
     #relation
     quote = db.relationship('Quote', back_populates='categories_quote')
+    author = db.relationship('Author', back_populates='favorite_categories')
     
     def __repr__(self):
         return f'<Categories: {self.id}>'
@@ -55,6 +56,7 @@ class Author(db.Model):
     disagree = db.relationship('Disagree', back_populates='author_disagree')
     author_profession = db.relationship('Profession', back_populates='author_quote')
     author_country = db.relationship('Country', back_populates='author_quote')
+    favorite_categories = db.relationship('Categories', back_populates='author')
     #relation self
     follows = db.relationship(
     'Author',
@@ -412,3 +414,88 @@ def daily_quote():
         'agree': len(random_quote.agree),
         'disagree': len(random_quote.disagree)
     })
+    
+# 13. Melihat Quote trending, diurutkan dari yang paling banyak agree atau disagree nya
+@app.route('/quotes/trending/<int:page_number>', methods=['GET'])
+def get_trending_quotes(page_number=1):
+    per_page = 10  # Jumlah kutipan per halaman
+    # Mendapatkan kutipan yang paling banyak disetujui (agree) atau tidak disetujui (disagree)
+    # Diurutkan berdasarkan jumlah agree atau disagree dalam urutan menurun
+    trending_quotes = Quote.query \
+        .outerjoin(Agree).outerjoin(Disagree) \
+        .group_by(Quote.id) \
+        .order_by(func.count(Agree.id).desc(), func.count(Disagree.id).desc()) \
+        .paginate(page_number, per_page, error_out=False)
+    # Mengonversi hasil ke dalam format JSON
+    if trending_quotes.items:
+        return jsonify({
+            'quotes': [{
+                'id': quote.public_id,
+                'quote': quote.quote_text,
+                'author': quote.author_id,
+                'year': quote.year,
+                'categories': quote.categories,
+                'source': quote.source,
+                'date': quote.date_post.strftime('%Y-%m-%d'),
+                'agree': len(quote.agree),
+                'disagree': len(quote.disagree)
+            } for quote in trending_quotes.items]
+        })
+    else:
+        return jsonify({'message': 'Tidak ada kutipan yang tersedia'}), 404
+    
+# 14.  Melihat daftar penulis berdasarkan profesi tertentu, dan diurutkan bersarkan paling banyak followersnya. satu page memiliki limit menampilkan 10 author.
+@app.route('/<profession>/<int:page>', methods=['GET'])
+def authors_by_profession(profession, page):
+    # Mengambil daftar penulis berdasarkan profesi tertentu, diurutkan berdasarkan jumlah followersnya
+    authors = Author.query.filter_by(profession=profession)\
+                          .order_by(func.count(Author.followers).desc())\
+                          .paginate(page, per_page=10, error_out=False)
+    if not authors.items:
+        return jsonify({'message': 'Tidak ada penulis dengan profesi tersebut'}), 404
+    # Format data penulis ke dalam JSON
+    author_list = []
+    for author in authors.items:
+        author_data = {
+            'id': author.public_id,
+            'name': author.name,
+            'email': author.email,
+            'profession': author.profession,
+            'country': author.country,
+            'born': author.born.strftime('%Y-%m-%d'),
+            'follower_count': len(author.followers)
+        }
+        author_list.append(author_data)
+    # Membuat URL untuk halaman selanjutnya jika ada
+    next_page = None
+    if authors.has_next:
+        next_page = url_for('authors_by_profession', profession=profession, page=authors.next_num, _external=True)
+    return jsonify({'authors': author_list, 'total_pages': authors.pages, 'next_page': next_page})
+
+# 15.  Melihat daftar penulis berdasarkan negara tertentu, dan diurutkan bersarkan paling banyak followersnya. satu page memiliki limit menampilkan 10 author.
+@app.route('/<country>/<int:page>', methods=['GET'])
+def authors_by_country(country, page):
+    # Mengambil daftar penulis berdasarkan negara tertentu, diurutkan berdasarkan jumlah followersnya
+    authors = Author.query.filter_by(country=country)\
+                          .order_by(func.count(Author.followers).desc())\
+                          .paginate(page, per_page=10, error_out=False)
+    if not authors.items:
+        return jsonify({'message': 'Tidak ada penulis dengan negara tersebut'}), 404
+    # Format data penulis ke dalam JSON
+    author_list = []
+    for author in authors.items:
+        author_data = {
+            'id': author.public_id,
+            'name': author.name,
+            'email': author.email,
+            'profession': author.profession,
+            'country': author.country,
+            'born': author.born.strftime('%Y-%m-%d'),
+            'follower_count': len(author.followers)
+        }
+        author_list.append(author_data)
+    # Membuat URL untuk halaman selanjutnya jika ada
+    next_page = None
+    if authors.has_next:
+        next_page = url_for('authors_by_country', country=country, page=authors.next_num, _external=True)
+    return jsonify({'authors': author_list, 'total_pages': authors.pages, 'next_page': next_page})
