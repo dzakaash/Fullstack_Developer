@@ -87,8 +87,9 @@ Beberapa fitur yang bisa dlakukan:
 14. Melihat daftar penulis berdasarkan profesi tertentu 
 15. Melihat daftar penulis berdasarkan negara tertentu
 16. Melakukan komentar agree atau disagree terhadap Quote tertentu
-17. Melihat komentar agree tehadap suatu quote, dengan jumlah limit 5 yang ditampilkan per page_number
-18. Melihat komentar disagree tehadap suatu quote, dengan jumlah limit 5 yang ditampilkan per page_number
+17. Melihat komentar agree tehadap suatu quote, dengan jumlah limit 5 yang ditampilkan per page_number, ditampilkan juga jumlah like nya
+18. Melihat komentar disagree tehadap suatu quote, dengan jumlah limit 5 yang ditampilkan per page_number, ditampilkan juga jumlah like nya
+19. Memberikan like kepada komentar agree dan disagree
 
 catt : 
 - di endpoint melihat quote buat juga informasi berapa banyak yang memberikan agree dan disagree

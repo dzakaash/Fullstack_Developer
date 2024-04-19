@@ -1,0 +1,44 @@
+Tabel :
+1. Twit : id, public_id, twit text, user_id, date_post, retweet
+2. User : id, username, front_name, back_name, email, password, date_birth
+3. Comment : id, public_id, comment_text, user_id, twit_id, date_post
+4. Like ; id, user_id, twit_id
+
+
+
+user :
+1. Register New Account
+catt : belum dibuat cara mengatasi apabila yang dikirim data kosong atau spasi saja, dan password belum diatur memenuhi kriteria tertentu
+2. Login
+3. Log-out
+4. Update User data
+
+twit :
+5. Post a Tweet
+6. Post a retweet
+7. like Tweet
+8. unlike
+9. Comment Tweet
+10. Delete Comment
+
+other:
+11. Get User profile
+12. Follow a User
+13. Unfollow a User
+14. Get Follower from a User
+15. Get User's following
+16. list Tweet
+
+search :
+17. Search User
+18. Search Tweet
+
+trending :
+19. Most popular user
+20. Most popular Tweet
+
+Home :
+21. Welcome
+
+Report :
+22. List Inactive Users
