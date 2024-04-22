@@ -6,12 +6,12 @@ from sqlalchemy import text
 # 17. Cari Pengguna, utama
 @app.route('/users', methods=['GET'])
 def users_by_keywords():
-    # mendapatkan keywords, json 'keywords', 'page'
-    data = request.get_json()
-    keywords = data.get('keywords')
-    if not keywords:
-        return jsonify({'message': 'Kata kunci tidak ditemukan'}), 400
     try:
+        # mendapatkan keywords, json 'keywords', 'page'
+        data = request.get_json()
+        keywords = data.get('keywords')
+        if not keywords:
+            return jsonify({'message': 'Kata kunci tidak ditemukan'}), 400
         # Mendapatkan parameter paginasi
         page = data.get('page', 1)
         per_page = 10

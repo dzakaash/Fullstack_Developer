@@ -218,7 +218,7 @@ def user_twit():
         } for twit in twits]
         # Membuat URL untuk halaman selanjutnya jika ada
         next_page = url_for('user_followed', username=username, page=page + 1, _external=True)
-        return jsonify({'followed': twits_list, 'next_page': next_page}), 200
+        return jsonify({'twit_list': twits_list, 'next_page': next_page}), 200
     except Exception as e:
         return jsonify({'message': 'Terjadi kesalahan saat mencari twit pengguna', 'error': str(e)}), 500
 

@@ -1,6 +1,6 @@
-from flask import jsonify, request, url_for, session
 from twiter import app, db
 from twiter import Twit, Users
+from flask import jsonify, request, url_for, session
 from sqlalchemy import text
 
 # 21. Home

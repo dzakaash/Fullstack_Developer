@@ -1,6 +1,6 @@
-from flask import jsonify, request, url_for
 from twiter import app, db
 from twiter import Users
+from flask import jsonify, request, url_for
 from datetime import datetime
 from sqlalchemy import text
 
@@ -17,8 +17,7 @@ def inactive_users():
             LIMIT :limit OFFSET :offset
         """)
         # Mendapatkan parameter paginasi
-        data = request.get_json()
-        page = data.get('page', 1)
+        page = request.args.get('page', 1)
         per_page = 10
         offset = (page - 1) * per_page
         # Eksekusi query untuk mendapatkan pengguna paling populer dengan parameter paginasi

@@ -1,6 +1,6 @@
-from flask import jsonify, request, url_for
 from twiter import app, db
 from twiter import Users, Twit
+from flask import jsonify, request, url_for
 from sqlalchemy import text
 
 # 19. Most popular user, utama
@@ -16,8 +16,7 @@ def popular_users():
             LIMIT :limit
             OFFSET :offset
         """)
-        data = request.get_json()
-        page = data.get('page', 1)
+        page = request.args.get('page', 1)
         per_page = 10
         offset = (page - 1) * per_page
         popular_users = db.session.execute(query, {'limit': per_page, 'offset': offset}).fetchall()
@@ -53,8 +52,7 @@ def popular_twits():
             OFFSET :offset
         """)
         # Mendapatkan parameter paginasi
-        data = request.get_json()
-        page = data.get('page', 1)
+        page = request.args.get('page', 1)
         per_page = 10
         offset = (page - 1) * per_page
         # Eksekusi query untuk mendapatkan pengguna paling populer dengan parameter paginasi
