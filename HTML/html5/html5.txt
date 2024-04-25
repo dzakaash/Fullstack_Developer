@@ -1,0 +1,47 @@
+Istilah HTML5 digunakan sebagai jargon yang mengacu pada teknologi web yang modern yang dikembangkan oleh WHATWG, bukan versi karena HTML5 adalah versi terbaru dan akan selalu diperbarui
+
+WHATWG (The Web Hypertext Application Technology Working Group)
+komunitas berisi orang-orang yang tertark pada perkembangan teknologi web, akibat dari w3c tidak tertarik lagi mengembangkan html karena mereka sedang fokus mengembangkan XHTML. Orang-orangnya kebanyakan dari Apple, Mozila, dan Opera
+
+Yang baru di HTML5:
+1. Semantic Elements
+2. Media Elements
+3. Canvas & SVG
+4. Form Validations
+5. Web Storage
+6. Accessibility
+
+Semantic
+berhubungan dengan makna/arti kata
+why?
+- Accessibility (mudah dibaca user)
+- Maintability (mudah dibaca developer)
+- SEO (mudah dibaca mesin pencari)
+
+- Merepresentasikan data yang akan ditampilkan bukan berdsarkan tampilan
+- Aksesibilitas, terutama saat menggunakan screen reader
+- lebih mudah mencari dan mengelola code yang memiliki makna
+- Berpengaruh pada SEO, karena semantic HTML dianggap sebagai kata kunci yang penting
+
+Elemen di HTML5
+Kategori:
+- Metadata (base, link, meta, script, style, template, title)
+- Flow (yang biasa kita gunakan dalam head dan body)
+- Sectioning (article, aside, nav, section), unruk bagian-bagian dari halaman
+- Heading (yang dipakai dalam heading)
+- Phrasing (digunakan untuk menjelaskan informasi yang ada di halaman web kita)
+- Embedded (elemen multimedia : audio, canvas, embed, iframe, img, math, object, picture, svg, video)
+- Interactice (elemen yang bisa dipakai untuk berinteraksi)
+
+contoh semantic elemen HTML5
+- <main>, medefinisikan halaman dan hanya ada satu main dalam satu HTML
+- <nav>
+- <section>, mengganti div
+- <header>
+- <footer>
+- <article>
+- <aside>
+
+WAI-ARIA
+Web Accessibility Initiative - Accessibel Rich Internet Applications
+Untuk menambahka elemen semantik pada elemen yang tidak semantik

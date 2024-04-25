@@ -54,7 +54,7 @@ def login():
           session['user_id'] = user.id
           user.last_activate = datetime.now().date()
           user.last_activity = 'login'
-          db.session.commit()
+          db.session.commit() 
           return jsonify({'message': 'Login berhasil!'})
       else:
           return jsonify({'message': 'Username atau password salah!'}, 401)

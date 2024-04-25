@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web storage</title>
+  </head>
+  <body>
+    <!-- web storage ada local storage dan session storage -->
+    <!-- digunakan untuk preferensi user, setting dan configuration,  score dan leaderboard pada game, posisi video/audio terakhir, dll -->
+    <!-- jangan digunakan untuk menyimpan data sensitif dan otentikasi -->
+    <!-- properties : setItem(key, value() menyimpan pasangan key value, getItem(key) mengambilitem berdasarkan value, removeItem(key) menghapus key dan value, clear() menghapus semua isi storage, key(index) mengambil nilai key berdasarkan index, length untuk mengetahui jumlah nilai di dalam storage -->
+    <h1>Halo Dunia!</h1>
+
+    <a href="" onclick="gantiNama(event)">Ganti Nama</a>
+    <a href="" onclick="hapusNama(event)">Hapus Nama</a>
+    <a href="" onclick="hapusStorage(event)">Hapus Storage</a>
+    <script>
+      const judul = document.querySelector("h1");
+      let nama = localStorage.getItem("nama");
+      if (!nama) {
+        nama = prompt("masukkan nama anda:");
+        localStorage.setItem("nama", nama);
+      }
+
+      judul.innerHTML = `Halo ${nama}!`;
+
+      // ganti nama
+      function gantiNama(e) {
+        e.preventDefault();
+        nama = prompt("masukkan nama baru anda: ");
+        localStorage.setItem("nama", nama);
+        judul.innerHTML = `Halo ${nama}!`;
+      }
+      // hapus nama
+      function hapusNama(e) {
+        e.preventDefault();
+        localStorage.removeItem("nama");
+      }
+      // hapus storage
+      function hapusStorage(e) {
+        e.preventDefault();
+        localStorage.clear();
+      }
+    </script>
+    <!-- sessionStorage akan hilang datanya jika sudah di close berbeda dengan localStorage -->
+    <!-- <script>
+      const judul = document.querySelector("h1");
+      let nama = sessionStorage.getItem("nama");
+      if (!nama) {
+        nama = prompt("masukkan nama anda:");
+        sessionStorage.setItem("nama", nama);
+      }
+
+      judul.innerHTML = `Halo ${nama}!`;
+    </script> -->
+  </body>
+</html>

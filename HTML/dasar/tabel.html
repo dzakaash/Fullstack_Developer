@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- tabel menggunakan tag table, didalamnya ada tag tr sebagai baris, dan di dalam tr ada td berurutan mengisi cell -->
+    <table>
+      <tr>
+        <td>Nama</td>
+        <td>Alamat</td>
+        <td>Umur</td>
+      </tr>
+      <tr>
+        <td>Budi</td>
+        <td>Jakarta</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>Susi</td>
+        <td>Bandung</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td>Rudi</td>
+        <td>Jakarta</td>
+        <td>30</td>
+      </tr>
+    </table>
+    <!-- da tabel yang complex dimana tabelnya dipisahkan antara header menggunakan tag thead, dan body menggunakan tag tbody -->
+    <!-- td dalam tabel header diganti th -->
+    <!-- jika cell pertama dari tabel header kosong maka cell pertama dari tabel body akan menjadi header  -->
+    <!-- atribut tabel yang utama ada 5, border(garis), cellspacing(jarak antar cell), cellpadding(luas dalam cell), colspan(merge dua cel yang vertikal/kolom), dan rowspan(merge dua cel yang horizontal/baris). Untuk border, cellspacing, dan cellpadding kita nanti gunakan css -->
+    <table border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th rowspan="2">No.</th>
+          <th colspan="3">Tabel</th>
+        </tr>
+        <tr>
+          <th>Nama</th>
+          <th>Alamat</th>
+          <th>Umur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1.</td>
+          <td>Budi</td>
+          <td>Jakarta</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>Susi</td>
+          <td>Bandung</td>
+          <td>25</td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>Rudi</td>
+          <td>Jakarta</td>
+          <td>30</td>
+        </tr>
+      </tbody>
+    </table>
+    <table border="1" cellspacing="0" cellpadding="5">
+      <tr>
+        <td>1,1</td>
+        <td>1,2</td>
+        <td>1,3</td>
+        <td>1,4</td>
+      </tr>
+      <tr>
+        <td>2,1</td>
+        <td rowspan="2" colspan="2">merge</td>
+        <td>2,4</td>
+      </tr>
+      <tr>
+        <td>3,1</td>
+        <td>3,4</td>
+      </tr>
+      <tr>
+        <td>4,1</td>
+        <td>4,2</td>
+        <td>4,3</td>
+        <td>4,4</td>
+      </tr>
+    </table>
+  </body>
+</html>

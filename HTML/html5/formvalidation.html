@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      form {
+        width: 600px;
+        padding: 20px;
+      }
+
+      form div {
+        margin: 10px;
+      }
+
+      label {
+        display: block;
+      }
+
+      input:invalid,
+      input:required:invalid {
+        border: none;
+        outline: 2px solid red;
+        border-radius: 2px;
+      }
+
+      input:valid,
+      input:required {
+        border: 1px solid black;
+        outline: inherit;
+        border-radius: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- form validation, ada dua jenis client side dan server side, client side ada dua jenis yaitu  html5 built-in validation dan javascript-->
+    <!-- built in validation ada input types, attributes -->
+    <!-- input types ada email, tel, url, number, range, datetime picker, color picker -->
+    <!-- input atributes untuk validasi: autcomplete, autofocus, required, minlength dan maxlength, min and max, step, pattern -->
+    <!-- jika menghapus semua validate gunakan aribut novalidate -->
+    <form action="" method="post">
+      <!-- atribut autocomplete akan memberikan kita saran untuk diisi dikolom sesuai dengan histori kita, jika tidak ingin ini terjadi maka atucomplete jadikan "off", autocomplete bisa diisi di input atau di form untuk keseluruhan -->
+      <!-- autofokus digunakan untuk otomatis mengarahkan kursor saat pertama kali membuka browser, dan ini hanya boleh ada satu -->
+      <!-- required agar input itu harus diisi sebelum di submit -->
+      <!-- minlength and maxlenghth untuk maksimal dan panjang input -->
+      <div>
+        <label for="nama">Masukkan nama:</label>
+        <input
+          type="text"
+          name="nama"
+          id="nama"
+          autocomplete="off"
+          autofocus
+          required
+          minlength="2"
+        />
+      </div>
+      <div>
+        <label for="email">Masukkan email:</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div>
+        <label for="nohp">Masukkan nohp:</label>
+        <input type="tel" name="nohp" id="nohp" />
+      </div>
+      <div>
+        <label for="website">Masukkan website:</label>
+        <input type="url" name="website" id="website" />
+      </div>
+      <!-- min dan max untuk angka -->
+      <!-- step untuk  interval tiap angka-->
+      <div>
+        <label for="angka">Masukkan angka:</label>
+        <input
+          type="number"
+          name="angka"
+          id="angka"
+          min="10"
+          max="100"
+          step="3"
+        />
+      </div>
+      <!-- range -->
+      <div>
+        <label for="angka">Masukkan angka:</label>
+        <input type="range" name="slider" id="slider" />
+      </div>
+      <div>
+        <label for="tanggal">Masukkan tanggal:</label>
+        <input type="date" name="tanggal" id="tanggal" />
+      </div>
+      <div>
+        <label for="warna">Masukkan warna:</label>
+        <input type="color" name="warna" id="warna" />
+      </div>
+      <!-- pattern digunakan untuk mengisi regular expression -->
+      <div>
+        <label for="kode pos">Masukkan kode pos:</label>
+        <input
+          type="text"
+          name="kode pos"
+          id="kode pos"
+          pattern="([1-9])[0-9]{4}$"
+        />
+      </div>
+      <div>
+        <button type="submit">kirim</button>
+      </div>
+    </form>
+  </body>
+</html>

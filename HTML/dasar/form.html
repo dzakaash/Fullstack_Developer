@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- menggunakan tag form -->
+    <!-- elemen form ada 5, input, textarea, select, button, label-->
+    <!-- elemen input menggunakan atribut type, type menentukan jenis inputan ada: text, password(disembunyikan), radio (pilihan), checkbox, submit, reset, button -->
+    <!-- kita gunakan tag label untuk memberi label pada kotak form, dengan for untuk terhubung dengan id input -->
+    <table>
+      <form>
+        <tr>
+          <td><label for="username">username : </label></td>
+          <td><input type="text" id="username" /></td>
+        </tr>
+        <tr>
+          <td><label for="password">password : </label></td>
+          <td><input type="password" id="password" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <!-- radio button dikelompokkan menggunakan name -->
+          <td colspan="2">
+            <input type="radio" id="male" name="gender" value="male" /><label
+              for="male"
+              >male</label
+            >
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+            /><label for="female">female</label>
+          </td>
+        </tr>
+        <br />
+        <tr>
+          <td></td>
+          <td colspan="3">
+            <!-- gunakn checkbox sebagai tipe ceklis -->
+            <input type="checkbox" id="menyanyi" /><label for="menyanyi"
+              >menyanyi</label
+            >
+            <input type="checkbox" id="olahraga" /><label for="olahraga"
+              >olahraga</label
+            >
+            <input type="checkbox" id="ngoding" /><label for="ngoding"
+              >ngoding</label
+            >
+          </td>
+        </tr>
+        <tr>
+          <!-- textarea digunakan untuk mengisi informasi panjang -->
+          <td><label for="resume">Resume</label></td>
+          <td><textarea id="resume"></textarea></td>
+        </tr>
+        <tr>
+          <td><label for="kota">Kota</label></td>
+          <td>
+            <select id="kota">
+              <option value="1">Bandung</option>
+              <option value="2">Jakarta</option>
+              <option value="3">Yogyakarta</option>
+              <option value="4">Surabaya</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <!-- type button ada submit, reset, button, walau submit bisa jadi tag form sendiri -->
+          <td colspan="2"><button type="submit">kirim!</button></td>
+        </tr>
+      </form>
+    </table>
+  </body>
+</html>

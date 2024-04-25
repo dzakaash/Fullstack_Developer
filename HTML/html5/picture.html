@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Picture</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.125em;
+        line-height: 1.6;
+        color: #333;
+        padding: 2em;
+      }
+
+      .hero {
+        display: grid;
+        grid-gap: 2em;
+        align-items: center;
+      }
+
+      img {
+        max-width: 100px;
+        height: auto;
+      }
+
+      @media (min-width: 960px) {
+        .hero {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- picture bertujuan untuk optimasi halaman agar menghemat bandwith dan mepercepat load time, bisa digunakan juga sebagai art direction untuk menampilkan gambar yang berbeda pada display/device yang berbeda -->
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Hello Luffy</h1>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+          exercitationem rem iste earum pariatur perferendis sed minima!
+          Provident, tempora perspiciatis! Quam mollitia aperiam asperiores
+          quasi iusto facilis repudiandae vero culpa.
+        </p>
+      </div>
+      <picture>
+        <source
+          media="(min-width: 960px)"
+          srcset="picture/luff_large.jpg"
+          sizes="50vw" />
+        <source media="(min-width: 600px)" srcset="picture/luff_medium.jpg" />
+        <img src="picture/luff_small.jpg" alt="Luffy Makan Semangka"
+      /></picture>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio & Video</title>
+  </head>
+  <body>
+    <!-- audi digunakan muntuk menjalankan file audio, dile yang didukung adalah .mp3, .wav(lebih berkualitas namun ukurannya lebih besar, .ogg(lebih ringan dari mp3), biasanya juga digunakan tag source untuk memiliki audio) -->
+    <!-- atribut audio ada src(sumber), controls(untuk menambahkan pengontrol, jika tidak ada maka browser akan berasumsi kita kendalikan dengan javascript), preload(audio di laad sebelum dijalankan), autoplay(menjalankan audio otomatis), loop(agar looping audio setelah habis), muted(tidak bersuara)-->
+    <figure>
+      <figcaption>Frieren Koplo</figcaption>
+      <audio controls autoplay loop>
+        <source src="frieren.ogg" type="audio/ogg" />
+        <source src="frieren.mp3" type="audio/mpeg" />
+        <source src="frieren.wav" type="audio/wav" />
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+    </figure>
+    <!-- tag video digunakan untuk menampilkan video, film, ataupun audio-->
+    <!-- atributnya terdiri dari src, controls, poster, preload, autoplay(bisa digunakan jika digunakan bersamaan dengan muted), loop, muted, width, height -->
+    <figure>
+      <figcaption>Mushoku Koplo</figcaption>
+      <video loop controls width="400" poster="mushoku_poster.jpg">
+        <source src="mushoku.mp4" type="video/mp4" />
+        your browser doesn't support the <code>video</code>
+      </video>
+    </figure>
+    <!-- track, atributnya berisi src, kind, title, srclang -->
+    <!-- kind berisi jenis track, bisa subtitle, caption, chapter(bagian2 dari video yang dituju), description-->
+    <!-- caption dari video youtube bisa kita dapatkan dengan website downsub.com, ubah formatnya menjadi vtt, coma jadi titik, dan atasnya beri judul WEBVTT -->
+    <!-- srclang kode bahasa -->
+    <video controls width="400">
+      <source src="meme.mp4" type="video/mp4" />
+      <track
+        src="meme.vtt"
+        kind="captions"
+        title="Sub Meme Indo"
+        srclang="id"
+      />
+      <track src="meme.vtt" kind="captions" title="Sub Meme Eng" srclang="en" />
+    </video>
+    <!-- embed, mengambil video dari youtube, codenya ada pada tombol share -->
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/YlnFD7bbbHs?si=Q1rLQgKL3d-jt-c5"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </body>
+</html>

@@ -1290,7 +1290,26 @@
 #     return result
 # print(isPower([2, 3, 4])) #1, 0, 1
 
-#65. Service-Line, https://www.hackerrank.com/challenges/service-lane/problem?isFullScreen=true
-# diberikan array lebar pda titik di sepanjang jalan
-# diberikan daftar indeks titik masuk dan keluar
-# dengan mempertimbangkan setiap pasangan titik masuk dan keluar, hitung ukuran maksimum kendaraan yang dapat melewati segmen jalur pelayaran tersebut dengan aman
+# #65. Service-Line, https://www.hackerrank.com/challenges/service-lane/problem?isFullScreen=true
+# # diberikan array lebar pda titik di sepanjang jalan
+# # diberikan daftar indeks titik masuk dan keluar
+# # dengan mempertimbangkan setiap pasangan titik masuk dan keluar, hitung ukuran maksimum kendaraan yang dapat melewati segmen jalur pelayaran tersebut dengan aman
+# def serviceLane(n, cases):
+#     min = max(n)
+#     list = []
+#     for case in cases:
+#         min = max(n)
+#         for i in range(case[0], case[1]+1):
+#             if n[i] < min:
+#                 min = n[i]
+#         list.append(min)
+#     return list
+
+# print(serviceLane([2, 3, 1, 2, 3, 2, 3, 3], [[0, 3], [4, 6], [6, 7], [3, 5], [0, 7]])) #1
+
+# 66. Lisa Workbook, https://www.hackerrank.com/challenges/lisa-workbook/problem?isFullScreen=true
+# buku soal berisi soal latihan dikelompokkan menjadi beberapa bab
+# suatu masalah menjadi istimewa jika indeksnya dalam suatu bab sama dengan nomor halaman tempatnya berada
+# format buku 
+def workbook(n, k, arr):
+    # Write your code here

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mage Elements</title>
+  </head>
+  <body>
+    <!-- img attributes: src(lokasi), alt(aleternative text), width & height, title(informasi tambahan mengenai gambar, akan terlihat jika mouse diarahkan), srcset(memilih gambar berbeda berdasarkan syarat tertentu) -->
+    <!-- syarat yang bisa dipakai bisa seperti weight co; 500w, atau DPR (kepadatan piksel) co: 1x, 2x, 3x -->
+    <!-- Sizes adalah untuk mengatur ukuran gambar yang berbeda berdasarkan 'media condition' -->
+    <!-- Loading adalah bagaimana gambar dilaad-oleh browser, bisa diisi 'eager' (defaul) yang dimana dia sudah di load saat page dibuka, atau 'lazy' dimana dia baru akan diload saat kita scroll ditempat gambar itu berada -->
+    <h1 style="margin-bottom: 1500px">Image Elements</h1>
+    <img
+      src="luff_small.jpg"
+      alt="Luffy Makan Semangka"
+      srcset="luff_small.jpg 500w, luff_medium.jpg 750w, luff_large.jpg 1000w"
+      sizes="(min-width: 1200px) 50vw"
+      loading="lazy"
+    />
+    <!-- figure merepresentasikan konten yang berdiri sendiri tanpa mempengaruhi flow halaman, bisa gambar, ilustrasi, diagram, code snippet. Biasanya gambar yang memiliki caption menggunakan tag <figcaption> -->
+    <figure>
+      <img src="naruto.jpg" alt="Naruto Makan Semangka" />
+      <figcaption>Naruto Makan Semangka</figcaption>
+    </figure>
+  </body>
+</html>
