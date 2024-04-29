@@ -1,0 +1,8 @@
+JDK (Java Development Kit), digunakan untuk development java
+Kode java adalah .java jika dicomple maka jadi file java binary .class
+
+JRE (Java Runtime Environment), digunakan untuk merunning aplikasi java
+File java yang banyak akan di archive menjadi satu file .jar
+
+Java Virtual Machine
+Java hanya bahasa pemrograman, maka diperlukan java virtual machine untuk mengeksekusi

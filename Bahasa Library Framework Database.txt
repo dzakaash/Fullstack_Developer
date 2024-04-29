@@ -1,0 +1,128 @@
+BAHASA
+
+Pengembangan Web Frontend:
+
+- JavaScript: Bahasa pemrograman yang paling banyak digunakan untuk membuat halaman web interaktif.
+- TypeScript: Superset dari JavaScript yang menambahkan pengetikan statis, semakin populer karena membantu dalam pengembangan aplikasi skala besar.
+- HTML: Dasar dari semua halaman web, selalu dibutuhkan untuk struktur halaman web.
+- CSS: Esensial untuk styling dan tampilan visual halaman web, selalu digunakan bersama HTML.
+
+Bahasa Pemrograman Serbaguna:
+
+- Python: Digunakan di berbagai bidang termasuk pengembangan web, analisis data, pembelajaran mesin, dan lainnya.
+- Java: Banyak digunakan dalam pengembangan aplikasi enterprise, Android, dan aplikasi web.
+- C#: Bagian dari platform .NET, sering digunakan dalam pengembangan aplikasi desktop, web, dan mobile.
+- PHP: Umum digunakan untuk pengembangan web dinamis pada sisi server.
+- Ruby: Dikenal dengan framework Ruby on Rails, digunakan untuk pengembangan web yang cepat.
+
+Bahasa Pemrograman untuk Pengembangan Mobile:
+
+- Swift: Utamanya digunakan untuk pengembangan aplikasi iOS dan macOS.
+- Kotlin: Populer untuk pengembangan aplikasi Android dan juga dapat digunakan untuk pengembangan backend.
+- Objective-C: Meskipun digantikan oleh Swift, masih digunakan dalam pengembangan aplikasi iOS yang lebih tua.
+.NET (C# dan F#): Digunakan untuk pengembangan aplikasi mobile melalui Xamarin dalam ekosistem .NET.
+
+Bahasa Pemrograman Sistem dan Performa Tinggi:
+
+- C++: Digunakan untuk pengembangan sistem dan aplikasi yang membutuhkan performa tinggi.
+- Golang: Dikenal dengan performa dan konkurensi yang baik, sering digunakan untuk pengembangan backend dan sistem.
+- Rust: Fokus pada keamanan memori dan sistem, digunakan untuk kasus penggunaan yang membutuhkan keandalan tinggi.
+
+Pengembangan Aplikasi Desktop dan Otomatisasi:
+
+- C# (.NET): Sering digunakan untuk pengembangan aplikasi desktop di Windows.
+- Visual Basic (.NET): Digunakan untuk pengembangan cepat dan scripting di lingkungan Windows, tetapi popularitasnya menurun dibandingkan dengan C#.
+
+FRONTEND LIBRARY AND FRAMEWORK
+
+Framework dan Library untuk Pengembangan Aplikasi Mobile:
+- React Native: Digunakan untuk membangun aplikasi mobile native cross-platform.
+- Flutter: Framework dari Google untuk pengembangan aplikasi mobile cross-platform dengan bahasa Dart.
+
+Framework untuk Pengembangan Aplikasi Web dengan Server-Side Rendering:
+- Next.js: Framework yang memungkinkan pembuatan aplikasi web dengan server-side rendering dan static site generation, sering digunakan bersama dengan React.js.
+
+Framework untuk Single-Page Applications (SPA) dan Frontend Web:
+- React.js: Library yang digunakan untuk membangun antarmuka pengguna yang interaktif dan komponen UI yang dapat digunakan kembali.
+- Angular.js: Framework yang menyediakan alat lengkap untuk membangun aplikasi web dinamis dengan two-way data binding dan dependency injection.
+- Vue.js: Framework progresif yang digunakan untuk membangun antarmuka pengguna dan aplikasi single-page.
+- Ember.js: Framework yang menyediakan konvensi dan best practice dalam membangun aplikasi web yang ambisius.
+- Backbone.js: Menyediakan struktur dasar untuk aplikasi web dengan model yang kaya dan tampilan yang dapat diikat ke event.
+- Knockout: Library yang membantu mengelola UI dengan model yang bersih dan data-binding yang kuat.
+
+Utility Library untuk Pemrograman JavaScript:
+- Lodash: Library yang menyediakan fungsi utilitas untuk tugas-tugas pemrograman sehari-hari, seperti manipulasi array, objek, dan string
+
+Library dan Framework untuk Styling dan Animasi:
+- Bootstrap: Framework yang menyediakan komponen desain responsif dan sistem grid untuk mempercepat pengembangan front-end.
+- SASS: Preprocessor CSS yang memungkinkan penggunaan variabel, nested rules, dan mixin untuk styling yang lebih efisien.
+- LESS: Preprocessor CSS serupa dengan SASS yang memudahkan pengelolaan stylesheet dengan fitur seperti variabel dan fungsi.
+
+Library untuk Visualisasi Data:
+- D3.js: Library yang digunakan untuk menghasilkan visualisasi data yang kompleks dan interaktif di web.
+
+Library dan Framework untuk Pengembangan Aplikasi Lainnya:
+- jQuery: Library yang memudahkan manipulasi DOM, event handling, dan AJAX untuk pengembangan web yang lebih cepat dan mudah.
+- Ext JS: Framework kaya fitur untuk membangun aplikasi web enterprise-grade.
+- Durandal: Framework yang memungkinkan pembuatan aplikasi Single Page yang modular dan mudah dikelola.
+- CanJS: Fokus pada pengembangan aplikasi web yang maintainable dengan komponen yang dapat digunakan kembali.
+
+Runtime Environment:
+- Node.js: Bukan framework atau library, melainkan runtime environment yang memungkinkan JavaScript dijalankan di server-side.
+- Axios: Ini adalah library JavaScript yang digunakan untuk membuat HTTP request dari node.js atau XMLHttpRequests dari browser, yang berarti ini digunakan untuk komunikasi dengan backend. Axios masuk dalam kategori library untuk pengembangan frontend dan backend.
+
+
+BACKEND FRAMEWORK AND LIBRARY
+
+Framework Berbasis Python:
+- Django: Menyediakan struktur lengkap untuk aplikasi web dengan fitur ORM, routing, dan templating.
+- Flask: Lebih ringan dibanding Django, memberikan fleksibilitas lebih untuk pengembang dalam menyesuaikan komponen aplikasi.
+
+Framework Berbasis PHP:
+- Laravel: Menawarkan ekosistem yang kaya dengan fitur seperti Eloquent ORM, Blade templating, dan artisan command line.
+- Symfony: Memberikan komponen yang dapat digunakan kembali dan arsitektur yang memungkinkan pengembangan aplikasi yang modular.
+- CakePHP: Memudahkan pengembangan dengan konvensi yang kuat dan fitur bawaan seperti validasi.
+- Yii: Cocok untuk proyek yang membutuhkan performa tinggi dan integrasi dengan teknologi lain.
+- Codelgniter: Framework yang ringan dengan pendekatan praktis dan dokumentasi yang baik.
+- Zend: Menyediakan berbagai komponen untuk keamanan, formulir, dan banyak lagi, tetapi kurang populer dibandingkan framework PHP lainnya.
+
+Framework Berbasis Java:
+- Struts 2: Menggunakan arsitektur MVC dan cocok untuk pengembangan aplikasi enterprise yang besar.
+- Spring Framework: Sangat robust dan serbaguna, menggunakan konsep Dependency Injection dan Inversion of Control.
+- Hibernate: Fokus pada operasi database dengan abstraksi layer yang memudahkan konfigurasi data1.
+
+
+Library untuk Pengembangan Ilmiah dan Data:
+- NumPy: Library Python yang menyediakan dukungan untuk array besar dan multidimensi serta berbagai operasi matematika tingkat tinggi.
+- SciPy: Library Python yang digunakan untuk komputasi ilmiah dan teknis, seperti aljabar linear, optimasi, integrasi, dan lainnya.
+
+Sistem Manajemen Konten (CMS):
+- Joomla: Sistem manajemen konten open-source yang memungkinkan pembuatan situs web dan aplikasi online yang kuat.
+
+Framework untuk Pengembangan Aplikasi Java:
+- Play: Framework Java dan Scala yang menyediakan fitur untuk pengembangan aplikasi web yang cepat dan skalabel.
+- Grails: Framework pengembangan aplikasi web yang menggunakan bahasa pemrograman Groovy, yang berjalan di atas JVM (Java Virtual Machine).
+
+Web Server:
+- Apache: Perangkat lunak server web yang banyak digunakan untuk melayani halaman web.
+
+DATABASE
+
+RDBMS untuk Pengembangan Aplikasi Bisnis Skala Besar:
+- Oracle: Sangat populer di sektor bisnis dan sering digunakan untuk aplikasi enterprise dan cloud.
+- Microsoft SQL Server: Banyak digunakan dalam aplikasi bisnis karena kompatibilitasnya dengan produk Microsoft lainnya.
+- DB2: Dikembangkan oleh IBM, sering digunakan dalam aplikasi bisnis yang memerlukan keandalan dan skalabilitas tinggi.
+- Sybase (SAP ASE): Digunakan untuk aplikasi bisnis dengan performa tinggi dan keamanan data yang tinggi.
+- Teradata: Dikenal untuk pengelolaan pergudangan data besar dan analitik.
+
+RDBMS untuk Pengembangan Aplikasi Web dan Mobile:
+- MySQL: Populer di kalangan pengembang web karena sifatnya yang open-source dan dukungan komunitas yang luas.
+- PostgreSQL: Dikenal dengan fitur-fiturnya yang canggih dan sering digunakan untuk aplikasi web yang membutuhkan operasi database yang kompleks.
+- MongoDB: Ini adalah sistem database NoSQL yang populer, berjenis dokumen, dan menggunakan format BSON (Binary JSON). MongoDB dirancang untuk fleksibilitas, skalabilitas, dan memiliki kemampuan untuk mengelola query yang kompleks
+- Supabase: Supabase adalah platform yang menyediakan database real-time sebagai alternatif open-source untuk Firebase. Ini memungkinkan pengembang untuk membangun aplikasi web dan mobile lebih cepat. Supabase masuk dalam kategori backend as a service (BaaS) dan database sebagai layanan (DBaaS)
+
+RDBMS untuk Aplikasi dengan Sumber Daya Terbatas atau Tersebar:
+- Informix: Cocok untuk aplikasi yang memerlukan integrasi data SQL, NoSQL, JSON, deret waktu, dan spasial.
+- SQLite: Ideal untuk aplikasi mobile atau desktop dengan sumber daya terbatas karena tidak memerlukan konfigurasi server yang rumit.
+
+Rust TypeScript, Supabase, 
