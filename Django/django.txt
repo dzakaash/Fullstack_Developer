@@ -1,0 +1,119 @@
+Django adalah web framework di python yang berguna untuk rapid development yang semuanya sudah lengkap
+- Django menggunakan model-view-controller, yaitu entitas yang ada dipisahkan
+- Vie, persentasi ke user
+- controller, yang mengatur alur data dan request
+- model, yaitu struktur yang bisa kita ambil dari database
+- ALur dengan Django : Client > (request) URLconf > (pilih view) Views > (query set) Model > (data transaction) Database > (data transaction) Model > (respond data) Views > (pilih template HTML) Template > (webpage) Client
+- Semua itu di handle Django dalam sebuah app (Urlconf, Views, Model, Template), app itu bisa ditambahkan dan dikurangkan, sehingga Djanggo bisa terdiri dari beberapa app
+
+- aktifkan environment dahulu
+- pip install Django
+- django-admin startproject mywebsite > membuat folder project
+- mv mywebsite/ djangoproject/ > merename folder project mywebsite menjadi django project
+- python manage.py startapp blog > membuat app blog
+- cd mywebsite > masuk ke folder project nya
+- atur database di settings.py
+- py manage.py runserver > jalankan server
+- pip install psycopg2 > install psycopg2 jika belum install psycopg2 di environment
+- python manage.py migrate > lakukan migrate jika error migrate
+- buat path di file urls.
+- hubungkan urls dengan funsgi pada file views.py
+- buat folder template di sampil folder mywebsite, lalu ubah di file settings.py bagian template bagian dirs diisi nama folder template
+- python manage.py startapp blog > membuat app dengan nama blog
+- untuk membuat template di app, pada setting.py, bagian installed_apps tambahkan nama app kita co: 'blog', setelah itu buat folder template di folder app, dan tambahkan satu folder di dalamnnya untuk membedakan urutan directori
+
+Membuat Static file
+- buat folder Static
+- lalu buat STATICFILES_DIRS di paling bawah settings
+- tambahkan {% load static %} di atas doctype file html kita
+
+MODEL
+- model adalah class dalam python
+- database berupa tabel, yang berisi data
+- Flow membuat tabel pada database yaitu dari model yang berupa class, kemudian makemigration menghasilkan migration file, lalu migrate menghasilkan database
+- python manage.py showmigrations > untuk melihat riwayat migrate
+- python manage.py migrate blog zero > menghapus seluruh migrate untuk app blog
+
+aplikasi bawaan django:
+django.contrib.admin
+django.contrib.auth
+django.contrib.contenttypes
+django.contrib.session
+django.contrib.messages
+django.contrib.staticfiles
+
+langkah:
+- python manage.py migrate > melakukan migrate
+- python manage.py createsuperuser > untuk membuat user
+- python manage.py createsuperuser --username=... --email=... > untuk langsung mengisi username dan password
+- di admin.py lakukan import class setelah membuat class model
+
+- python manage.py createsuperuser > buat superuser
+- http://localhost:8000/admin/ > untuk masuk ke akun django localhost dengann superuser dan kemudian mengisi datbase sesui model yang telah kita buat
+
+QuerySet
+- python manage.py shell > untuk menjalankan shell 
+- Post.objects.create(...=...,dll) > membuat objek dalam model Post
+- semuaPost = Post.objects.all() > menjadikan semua objek dalam variable
+- ( object).delete() > menghapus object, co: Post3.delete()
+- tiap object bisa diubah variabelnya, dan kemudian di save, co:
+post1=Post.objects.all()[0]
+post1.body = 'Ini adalah postingan pertama awalnya' 
+post1.save()
+- len() > untuk melihat panjang
+- Post.objects.get(key=value) > untuk mengambil satu data dengan cara filter
+- Post.objects.filter(key=value) > untuk mengambil banyak data dengan cara filter
+- - Post.objects.filter(key__iexact=value) > untuk malakukan filter namun dengan value mendekati
+- Post.objects.exclude(key=value) > melakukan filter dengan pengecualian
+- Post.objects.order_by(key) > melakukan pengurutan ascending
+- Post.objects.order_by(-key) > melakukan pengurutan descending
+- Post.objects.all().values(key) > untuk mendapatkan semua value dari key tersebut dalam dictionary
+- Post.objects.all().values_list(key) > untuk mengambil semua value dari keya dalam bentuk list
+
+Auth System
+- Authentification, mengecek user yang ada di server, mengatur user type dan subtype
+- Authorization, otorisasi permission yang bisa dilakukan user, berupa CRUD (Create, Read, Update, Delete)
+- Django menyediakan group manajement untuk memberikan otorisasi yang sama untuk tiap anggota di grup user tertentu
+- User type terdiri dari anonymous (tidak login) dan user (login)
+- User terdiri dari beberapa subtype: superuser(hirarki tertinggi), staff(dibawah superuser), active (user biasa yang otorisasinya terbatas), inactive (user yang tidak melakukan verifikasi atau tidak aktif lagi)
+- langkah:
+pastikan pada setting.py di installed_apps sudah ada django.contrib.auth dan django.contrib.sessions, di middleware yang mendukukan kegiatan authetication dan session, dan ada auth_password_validators untuk mengatur user agar tidak sama, dan ketentuan password lainnya.
+
+membuat superuser dan memodifikasi melalui shell
+- python manage.py shell
+>>> from django.contrib.auth.models import User 
+>>> list_user = User.objects.all()
+>>> list_user
+<QuerySet [<User: dzakapc>]>
+>>> list_user[0].__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000019A11179C40>, 'id': 1, 'password': 'pbkdf2_sha256$720000$xDbE31eHoPIWeH3Gt8uZb2$tmsCWbSb16jRxUjngYIGYyF11nRRinpix+WhrgBpKjE=', 'last_login': datetime.datetime(2024, 5, 23, 0, 22, 52, 447766, tzinfo=datetime.timezone.utc), 'is_superuser': True, 'username': 'dzakapc', 'first_name': '', 'last_name': '', 'email': 'dzakapc@gmail.com', 'is_staff': True, 'is_active': True, 'date_joined': datetime.datetime(2024, 5, 6, 12, 53, 36, 126078, tzinfo=datetime.timezone.utc)}  
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.create_user(username='JackAl', email='jack@gmail.com', password=
+'jack123')
+>>> user.is_staff
+False
+>>> user.is_active
+True
+>>> user.is_superuser 
+False
+>>> jackal = User.objects.get(username='JackAl')
+>>> jackal
+<User: JackAl>
+>>> jackal.first_name = 'Jack'
+>>> jackal.save()
+>>> jackal.last_name = 'Al'
+>>> jackal.save()
+>>> jackal.is_active = False
+>>> jackal.save() 
+>>> jackal.is_active = 'True' 
+>>> jackal.is_staff =True
+>>> jackal.is_superuser = True
+>>> jackal.save()
+>>> jackal.password
+'pbkdf2_sha256$720000$q35ROsgGzQmsGp7n2YrYOo$gGOz9kTkGg/5CDMDXOec2p/vW2RQwE72CTK+MQ6Klys=' 
+>>> jackal.set_password('jack1234') 
+>>> jackal.check_password('jack123')
+False
+>>> jackal.save()
+>>> jackal.password
+'pbkdf2_sha256$720000$KTmvxTVJyxN4P69kOnZEp9$ccVJ/mxJo8uNRYATll71mGc7WCltgWnhhX5LGepXVnM='

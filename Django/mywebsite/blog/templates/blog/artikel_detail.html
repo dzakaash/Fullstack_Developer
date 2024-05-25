@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{page_title}}</title>
+  </head>
+  <body>
+    <h1>{{page_title}}</h1>
+    <h2>{{object.judul}}</h2>
+    <span> Oleh : {{object.penulis}}, Date_post : {{object.publish}} </span>
+    <p>{{object.isi}}</p>
+    <br />
+    <a href="{% url 'blog:listview' all%}">Kembali</a>
+    <br />
+    <h3>Artikel lainnya:</h3>
+    <ol>
+      {% for artikel in artikel_list %}
+      <li>
+        <a href="{% url 'blog:detailview' artikel.slug %}" title=""
+          >{{artikel.judul}}</a
+        >
+        - oleh {{artikel.penulis}}
+      </li>
+      {% endfor %}
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{page_title}}</title>
+  </head>
+  <body>
+    <h1>{{page_title}}</h1>
+    <!-- <p>{{object_list}}</p> -->
+
+    <ul>
+      {% for artikel in object_list %}
+      <li>
+        <a href="{% url 'blog:detailview' artikel.slug %}" title=""
+          >{{artikel.judul}}</a
+        >
+        - oleh {{artikel.penulis}}
+      </li>
+      <p>{{artikel.isi}}</p>
+      <br />
+      <a href="{% url 'blog:update' artikel.pk %}" title="">Update</a>
+      <a href="{% url 'blog:delete' artikel.pk %}" title="">Hapus</a>
+      {% endfor %}
+    </ul>
+    <!-- apakah halaman ini ada pembagian halamannya? -->
+    {% if is_paginated %}
+    <!-- apakah halaman ini ada halaman sebelumnya? -->
+    {% if page_obj.has_previous %}
+    <!-- buat link ke halaman sebelumnya -->
+    <a
+      href="{% url 'blog:listview' penulis page_obj.previous_page_number %}"
+      title=""
+      >&laquo</a
+    >
+    {% else %}
+    <!-- kalau tidak ada halaman sebelumnya maka akan buat halaman biasa aja -->
+    <span>&laquo</span>
+    {% endif %}
+
+    <!-- membuat link ke nomor halaman -->
+    {% for i in paginator.page_range %}
+    <a href="{% url 'blog:listview' penulis i %}" title=""> {{i}} </a>
+    {% endfor %}
+
+    <!-- apakah halaman ini ada halaman selanjutnya? -->
+    {% if page_obj.has_next %}
+    <!-- buat link ke halaman selanjutnya -->
+    <a
+      href="{% url 'blog:listview' penulis page_obj.next_page_number %}"
+      title=""
+      >&raquo</a
+    >
+    {% else %}
+    <!-- kalau tidak ada halaman selanjutnya maka akan buat halaman biasa aja -->
+    <span>&raquo</span>
+    {% endif %} {% endif %}
+  </body>
+</html>

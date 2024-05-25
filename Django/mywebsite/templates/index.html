@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Datang</title>
+  </head>
+  <body>
+    <!-- link login -->
+    <ul>
+      <li><a href="{% url 'artikel:index' %}">artikel</a></li>
+      <li><a href="{% url 'login' %}">login</a></li>
+      <li><a href="{% url 'logout' %}">logout</a></li>
+    </ul>
+    <h3>User :{{user}}</h3>
+    <!-- <img
+      style="width: 100%"
+      src="{% static 'img/Background1.jpg' %}"
+      alt="Deskripsi Gambar"
+    /> -->
+    <!-- membuat img static variable, atur di views -->
+    <img style="width: 100%" src="{% static banner %}" alt="Deskripsi Gambar" />
+    <h1>Selamat Datang {{ judul }}</h1>
+    <h2>kontributor : {{ kontributor}}</h2>
+    <ul>
+      <li><a href="/blog/recent">Recent</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <ul>
+      <!-- template tags -->
+      {% for Link, name in nav%}
+      <li><a href=" {{Link}} " title="">{{name}}</a></li>
+      {% endfor %}
+    </ul>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed esse
+      repellendus architecto amet cum animi soluta officia, quod doloremque
+      dolor a id? Fuga amet qui distinctio ratione numquam porro repellendus.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+- Obejct Oreinted Programming adalah sudut pandanga bahasa pemrograman yang berkonsep "object"
+- Istilah yang sering dipakai adalah Object dan Class
+- Object adalah data yang berisi field/properties/attributes dan method/function/behacious
+- Semua data bukan primitive yang ada adalah object
+- class adalah blueprint/protype/cetakan untuk membuat object
+- class berisi deklarasi semua proerties dan function yang dimiliki oleh object
+- setiap object selalu dibuat dari class, dan class bisa membuat objek sebanyak apapun
+- untuk membuat class menggunakan kata kunci class
+- penamaan class biasa menggunakan format CamelCase (Capitalize)
+- Object adalah hasil instantiasi dari sebuah class
+- Untuk membuat object kita bisa mengunakan kata kunci new, dikuti nama Class dan kurung ()

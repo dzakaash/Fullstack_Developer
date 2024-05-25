@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{Title}}</title>
+  </head>
+  <body>
+    <h1>{{Title}}</h1>
+    <h2>{{Heading}}</h2>
+    <ul>
+      <li><a href="/blog/index">Blog</a></li>
+      <li><a href="{% url 'blog:berita' %}">Berita</a></li>
+      <li><a href="/blog/jurnal">Jurnal</a></li>
+      <li><a href="/blog/gosip">Gosip</a></li>
+      <li><a href="{% url 'blog:page' input='1' %}">Page</a></li>
+    </ul>
+
+    {% for post in Post %}
+    <h3>{{post.title}}</h3>
+    <h3>{{post.waktuPosting}}</h3>
+    <p>{{post.body}}</p>
+    <p>category : {{post.category}}</p>
+    <br />
+    {% endfor %}
+  </body>
+</html>
